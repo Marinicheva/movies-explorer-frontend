@@ -1,0 +1,10 @@
+.App {
+  margin: 0 70px;
+  width: 100%;
+
+  /*Temporary*/
+  background-color: rgba(255, 0, 0, 0.356);
+  height: 100vh;  
+}
+
+
