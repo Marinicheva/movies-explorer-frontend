@@ -2,13 +2,15 @@
 @import url("./vendor/fonts/fonts.css");
 
 :root {
+  --black: #000000;
+  --elem-bg-grey: #F4F4F4;
   --blue: #3456F3;
   --grey: #DDDEE3;
   --light-grey: #F2F2F2;
   --techs-bg-grey: F5F5F5;
   --techs-items-grey: #E8E8E8;
   --text-grey: #A0A0A0;
-  --black: #000000;
+ 
   --white: #ffffff;
   --accent-green: #2BE080;
   --warn-red: #EE3465;
