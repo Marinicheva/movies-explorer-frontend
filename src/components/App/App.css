@@ -1,23 +1,9 @@
 .App {
   margin: 0 auto;
-  padding: 0 70px;
   width: 100%;
 
   /*Temporary*/
-  background-color: rgba(255, 0, 0, 0.356);
   height: 100vh;  
-}
-
-@media screen and (max-width: 768px) {
-  .App {
-    padding: 0 30px;
-  }
-}
-
-@media screen and (max-width: 400px) {
-  .App {
-    padding: 0 14px;
-  } 
 }
 
 

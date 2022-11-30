@@ -1,0 +1,129 @@
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(90deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  75% {
+    transform: rotate(270deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+  
+}
+.promo {
+  display: flex;
+  justify-content: space-between;
+  padding: 75px 70px;
+  min-height: 574px;
+  background-color: #DDDEE3;
+  box-sizing: border-box;
+}
+
+.promo__text {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  max-width: 60%;
+}
+
+.promo__title {
+  margin: 0;
+  margin-bottom: 36px;
+  font-size: 50px;
+  line-height: 1.16;
+  font-weight: 400;
+}
+
+.promo__subtitle {
+  margin: 0;
+  margin-bottom: 146px;
+  max-width: 50%;
+  font-size: 13px;
+  line-height: 1.23;
+  opacity: .5;
+}
+
+.promo__more-btn {
+  display: block;
+  padding: 10px 20px;
+  width: 130px;
+  height: 36px;
+  font-size: 12px;
+  line-height: 1.33;
+  font-weight: 500;
+  color: var(--black);
+  text-decoration: none;
+  border: 1px solid var(--black);
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+.promo__earth {
+  width: 310px;
+  height: 304px;
+  background-image: url("../../images/promo-logo.svg");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: rotate 60s linear infinite;
+}
+
+@media screen and (max-width: 821px) {
+  .promo {
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 48px;
+    padding-top: 140px;
+  }
+
+  .promo__text {
+    max-width: none;
+    align-items: center;
+  }
+
+  .promo__title {
+    margin-bottom: 22px;
+    font-size: 40px;
+    line-height: 1.25;
+    text-align: center;
+  }
+
+  .promo__subtitle {
+    margin-bottom: 92px;
+    max-width: 40%;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 461px) {
+  .promo {
+    padding: 70px 10px 30px;
+    min-height: 636px;
+  }
+
+  .promo__title {
+    font-size: 30px;
+    line-height: 1.27;
+    letter-spacing: -0.04em;
+  }
+
+  .promo__subtitle {
+    margin-bottom: 80px;
+    max-width: 85%;
+  }
+
+  .promo__earth {
+    width: 210px;
+    height: 206px;
+  }
+}

@@ -1,6 +1,23 @@
 .header {
+  padding: 0 70px;
   height: 74px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.header_on_landing {
+  background-color: #DDDEE3;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 0 30px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .header {
+    padding: 0 14px;
+  } 
 }
