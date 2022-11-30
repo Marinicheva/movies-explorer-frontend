@@ -1,3 +1,8 @@
+.nav__tab {
+  display: flex;
+  align-items: center;
+}
+
 .nav__link_signup {
   font-size: 12px;
   line-height: 1.33;
@@ -5,6 +10,7 @@
 }
 
 .nav__link_signin {
+  display: block;
   margin-left: 30px;
   padding: 8px 20px;
   width: 76px;
@@ -15,10 +21,22 @@
   color: var(--white);
   background-color: var(--blue);
   border-radius: 3px;
+  box-sizing: border-box;
 }
 
 @media screen and (max-width: 400px) {
+  .nav__link_signup {
+    font-size: 10px;
+    line-height: 1.6;
+  }
+  
   .nav__link_signin {
     margin-left: 15px;
+    padding: 5px 12px;
+    width: 54px;
+    height: 26px;
+    font-size: 10px;
+    line-height: 1.6;
+    box-sizing: border-box;
   } 
 }
