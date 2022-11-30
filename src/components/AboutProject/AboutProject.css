@@ -1,0 +1,156 @@
+.section {
+  padding: 110px 70px;
+}
+
+.section__title {
+  margin: 0;
+  margin-bottom: 70px;
+  padding-bottom: 23px;
+  font-size: 22px;
+  line-height: 1.22;
+  letter-spacing: -0.04em;
+  border-bottom: 1px solid var(--black);
+}
+
+.about-project__list {
+  display: flex;
+  gap: 50px;
+  margin: 0;
+  margin-bottom: 112px;
+  padding: 0;
+  list-style: none;
+}
+
+.about-project__title {
+  margin: 0;
+  margin-bottom: 26px;
+}
+
+.about-project__text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.43;
+}
+
+.about-project__chart {
+  display: grid;
+  grid-template-columns: 20% 1fr;
+}
+
+.about-project__chart-part {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-project__chart-term {
+  padding: 9px 0;
+  margin-bottom: 15px;
+  min-height: 35px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.2;
+  box-sizing: border-box;
+}
+
+.about-project__chart-term_left {
+  color: var(--white);
+  background-color: var(--blue);
+}
+
+.about-project__chart-term_right {
+  background-color: var(--light-grey);
+}
+
+.about-project__chart-caption {
+  font-size: 14px;
+  line-height: 1.21;
+  text-align: center;
+  color: var(--text-grey)
+}
+
+@media screen and (max-width: 768px) {
+  .section {
+    padding: 90px 50px;
+  }
+
+  .about-project__list {
+    margin-bottom: 93px;
+    gap: 35px; 
+  }
+
+  .about-project__title {
+    margin-bottom: 22px;
+    font-size: 20px;
+    line-height: 1.22;
+    letter-spacing: -0.04em;
+  }
+
+  .about-project__text {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .about-project__chart {
+    grid-template-columns: 20% 1fr;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .section {
+    padding: 70px 10px;
+  }
+
+  .section__title {
+    margin: 0 8px 60px;
+    padding-bottom: 28px;
+    font-size: 18px;
+  }
+
+  .about-project__list {
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 0;
+  }
+
+  .about-project__item {
+    margin-bottom: 58px;
+  }
+
+  .about-project__title {
+    margin-bottom: 16px;
+    padding: 0 8px;
+    font-size: 18px;
+    line-height: 1.22;
+  }
+
+  .about-project__text {
+    padding: 0 8px;
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .about-project__chart {
+    margin: 0 8px;
+    display: grid;
+    grid-template-columns: 35% 1fr;
+  }
+
+  .about-project__chart-part {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .about-project__chart-term {
+    padding: 11px 0;
+    margin-bottom: 10px;
+    min-height: 35px;
+    text-align: center;
+    font-size: 11px;
+    line-height: 1.18;
+  }
+
+  .about-project__chart-caption {
+    font-size: 11px;
+    line-height: 1.18;
+  }
+}
