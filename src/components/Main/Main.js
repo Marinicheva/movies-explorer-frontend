@@ -4,6 +4,7 @@ import AboutProject from '../AboutProject/AboutProject';
 
 import './Main.css';
 import Techs from '../Techs/Techs';
+import AboutMe from '../AboutMe/AboutMe';
 
 const Main = () => {
   return (
@@ -11,6 +12,7 @@ const Main = () => {
       <Promo />
       <AboutProject />
       <Techs />
+      <AboutMe />
     </main>
   )
 }
