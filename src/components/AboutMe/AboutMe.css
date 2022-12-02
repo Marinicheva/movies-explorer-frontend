@@ -6,7 +6,7 @@
 .about-me__text {
   display: flex;
   flex-direction: column;
-  max-width: 60%;
+  max-width: 55%;
 }
 
 .about-me__name {
