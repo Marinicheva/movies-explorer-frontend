@@ -21,6 +21,11 @@
   line-height: 1.29;
   color: var(--black);
   text-decoration: none;
+  transition: opacity .6s;
+}
+
+.nav__link:hover {
+  opacity: .5;
 }
 
 .nav__link_visible_hamburger {

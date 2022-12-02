@@ -16,7 +16,7 @@ const Navigation = () => {
             <a href='f' className='nav__link'>Сохранённые фильмы</a>
           </li>
         </ul>
-        <a href='f' className='nav__account-link'>Аккаунт</a>
+        <a href='f' className='nav__link nav__account-link'>Аккаунт</a>
       </nav>
       <div className='hamburger'>
         <span></span>

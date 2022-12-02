@@ -45,6 +45,11 @@
   line-height: 1.21;
   font-weight: 500;
   text-decoration: none;
+  transition: opacity .6s;
+}
+
+.about-me__git-link:hover {
+  opacity: .8;
 }
 
 @media screen and (max-width: 820px) {
