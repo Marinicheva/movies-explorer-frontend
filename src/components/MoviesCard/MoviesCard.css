@@ -44,6 +44,12 @@
   background-repeat: no-repeat;
   background-position: center center;
   border: none;
+  cursor: pointer;
+  transition: opacity .6s;
+}
+
+.movie__save-btn:hover {
+  opacity: .5;
 }
 
 .movie__save-btn_active {

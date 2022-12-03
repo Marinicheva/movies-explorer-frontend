@@ -18,6 +18,12 @@
   font-weight: 500;
   background-color: transparent;
   border: 1px solid var(--techs-items-grey);
+  cursor: pointer;
+  transition: opacity .6s;
+}
+
+.movie__more-btn:hover {
+  opacity: .5;
 }
 
 @media screen and (max-width: 850px) {
