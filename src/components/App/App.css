@@ -1,9 +1,13 @@
 .App {
+  display: flex;
+  flex-direction: column;
   margin: 0 auto;
   width: 100%;
+  min-height: 100%;
+}
 
-  /*Temporary*/
-  height: 100vh;  
+.main {
+  flex: 1
 }
 
 

@@ -9,13 +9,13 @@ import Portfolio from '../Portfolio/Portfolio';
 
 const Main = () => {
   return (
-    <main className="content">
+    <div className="content">
       <Promo />
       <AboutProject />
       <Techs />
       <AboutMe />
       <Portfolio />
-    </main>
+    </div>
   )
 }
 

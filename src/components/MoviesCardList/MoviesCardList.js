@@ -5,11 +5,18 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 
 const MoviesCardList = () => {
+
+  const arr = [...Array(0)];
+
+  if (arr.length === 0) {
+    return <h2 className='movies__empty-list'>Ничего нет</h2>
+  }
+
   return (
     <>
       <ul className='movies__list'>
         {
-          [...Array(16)].map((_, i) => {
+          arr.map((_, i) => {
             return <MoviesCard key={i} isActive={i % 2 === 0} />
           })
         }
