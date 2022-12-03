@@ -10,17 +10,20 @@ const FilterCheckbox = () => {
     setIsChecked(state => !state);
   }
 
-  const checkboxBarClassNames = `search__checkbox-bar ${isChecked ? 'search__checkbox-bar_on' : ''}`;
-  const checkboxToggleClassNames = `search__checkbox-toggle ${isChecked ? 'search__checkbox-toggle_on' : 'search__checkbox-toggle_off'}`;
+  const checkboxBarClassNames = `checkbox__bar ${isChecked ? 'checkbox__bar_on' : ''}`;
+  const checkboxToggleClassNames = `checkbox__toggle ${isChecked ? 'checkbox__toggle_on' : 'checkbox__toggle_off'}`;
 
   return (
-    <label className='search__checkbox-label'>
-      <div className={checkboxBarClassNames}>
-        <div className={checkboxToggleClassNames} onClick={handleToggleCheckbox}></div>
+    <label className='checkbox__label'>
+      <div
+        className={checkboxBarClassNames}
+        onClick={handleToggleCheckbox}
+      >
+        <div className={checkboxToggleClassNames}></div>
       </div>
       <input
         ref={checkbox}
-        className='search__checkbox'
+        className='checkbox'
         type="checkbox"
         name="short-film"
         id="short-film"
