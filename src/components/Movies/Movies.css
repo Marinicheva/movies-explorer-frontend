@@ -1,15 +1,18 @@
 .movies {
   padding: 0 70px;
+  margin-bottom: 125px;
 }
 
 @media screen and (max-width: 768px) {
   .movies {
     padding: 0 30px;
+    margin-bottom: 155px;
   }
 }
 
 @media screen and (max-width: 620px) {
   .movies {
     padding: 0 10px;
+    
   }
 }
