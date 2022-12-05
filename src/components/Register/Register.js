@@ -9,7 +9,7 @@ const Register = () => {
     <section className='register'>
       <Greeting title="Добро пожаловать!" />
       
-      <form className="register__form reg-form">
+      <form className="reg-form">
         <label className="reg-form__label" htmlFor='reg-name'>Имя</label>
         <input type="text" id="reg-name" name="reg-name" className="reg-form__input" placeholder='Введите Ваше имя' />
         <span className="reg-form__input-error"></span>

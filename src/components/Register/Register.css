@@ -6,14 +6,10 @@
   width: 396px;
 }
 
-.register__form {
-  width: 100%;
-  transition: all .6s;
-}
-
 .reg-form {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .reg-form__label {
