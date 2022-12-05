@@ -6,15 +6,17 @@ import NavTab from '../NavTab/NavTab';
 import './Header.css';
 
 const Header = ({ isLoggedIn }) => {
- return (
-    <header className='header header_on_landing'>
+  const headerClassNames = `header ${!isLoggedIn ? 'header_on_landing' : ''}`;
+
+  return (
+    <header className={headerClassNames}>
       <a href='f' className='header__logo-link'>
         <img src={logo} alt='Логотип проекта' className='header__logo' />
       </a>
-      
-        {
-          isLoggedIn ? <Navigation /> : <NavTab />
-        }
+
+      {
+        isLoggedIn ? <Navigation /> : <NavTab />
+      }
     </header>
   )
 }
