@@ -1,20 +1,23 @@
-import React from 'react';
+import Header from '../Header/Header';
 import Promo from '../Promo/Promo';
 import AboutProject from '../AboutProject/AboutProject';
-
-import './Main.css';
 import Techs from '../Techs/Techs';
 import AboutMe from '../AboutMe/AboutMe';
 import Portfolio from '../Portfolio/Portfolio';
+import Footer from '../Footer/Footer';
+
+import './Main.css';
 
 const Main = () => {
   return (
     <div className="content">
+      <Header isLoggedIn={true} addBg={true} />
       <Promo />
       <AboutProject />
       <Techs />
       <AboutMe />
       <Portfolio />
+      <Footer />
     </div>
   )
 }

@@ -14,7 +14,7 @@ const AboutMe = () => {
           <p className="about-me__summary">Фронтенд-разработчик, 32 года</p>
           <p className="about-me__description">Я родилася и живу в Калуге, закончил факультет экономики Финуниверситета. У меня есть муж
             и дочь. Я люблю читать, а ещё увлекаюсь вязанием. Недавно начала кодить. С 2013 года работала в снабжении. После того, как завершения курса по веб-разработке планирую свою жизнь плотно связать с кодингом и веб-разработкой.</p>
-          <a href="https://github.com/Marinicheva" className="about-me__git-link">Github</a>
+          <a href="https://github.com/Marinicheva" className="about-me__git-link" target="blank">Github</a>
         </div>
         <img src={avatar} alt="Портретное фото студента" className="about-me_photo" />
       </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 import './Navigation.css';
 
 const Navigation = () => {
@@ -7,16 +7,16 @@ const Navigation = () => {
       <nav className='nav'>
         <ul className='nav__list'>
           <li className='nav__item'>
-            <a href='f' className='nav__link nav__link_visible_hamburger'>Главная</a>
+            <Link to='/' className='nav__link nav__link_visible_hamburger'>Главная</Link>
           </li>
           <li className='nav__item'>
-            <a href='f' className='nav__link nav__link_active'>Фильмы</a>
+            <Link to='/movies' className='nav__link nav__link_active'>Фильмы</Link>
           </li>
           <li className='nav__item'>
-            <a href='f' className='nav__link'>Сохранённые фильмы</a>
+            <Link to='/saved-movies' className='nav__link'>Сохранённые фильмы</Link>
           </li>
         </ul>
-        <a href='f' className='nav__link nav__account-link'>Аккаунт</a>
+        <Link to='/profile' className='nav__link nav__account-link'>Аккаунт</Link>
       </nav>
       <div className='hamburger'>
         <span></span>

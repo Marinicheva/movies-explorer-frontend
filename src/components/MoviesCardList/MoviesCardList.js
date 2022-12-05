@@ -6,7 +6,7 @@ import './MoviesCardList.css';
 
 const MoviesCardList = () => {
 
-  const arr = [...Array(8)];
+  const arr = [...Array(16)];
 
   if (arr.length === 0) {
     return <h2 className='movies__empty-list'>Ничего нет</h2>

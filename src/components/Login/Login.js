@@ -14,6 +14,7 @@ const Login = () => {
         formClass="login-form"
         submitBtnText={'Войти'}
         footerText={'Ещё не зарегистрированы?'}
+        footerPath={'/signup'}
         footerLinkText={'Регистрация'}
       >
         <label htmlFor="login-email" className="form__label">E-mail</label>
@@ -24,10 +25,6 @@ const Login = () => {
         <input type="password" id="login-password" name="login-password" className="form__input" />
         <span className="form__error-text"></span>
       </Form>
-      {/* <div className="login__bottom">
-        <p className="login__bottom-text">Ещё не зарегистрированы?</p>
-        <a href="f" className="login__bottom-back">Регистрация</a>
-      </div> */}
     </section>
   )
 }

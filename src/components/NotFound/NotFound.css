@@ -27,9 +27,11 @@
 .not-found__back {
   font-size: 14px;
   line-height: 1.21;
-  text-decoration: none;
   color: var(--blue);
+  background-color: transparent;
+  border: none;
   transition: opacity .6s;
+  cursor: pointer;
 }
 
 .not-found__back:hover {

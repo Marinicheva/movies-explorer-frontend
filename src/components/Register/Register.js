@@ -14,6 +14,7 @@ const Register = () => {
         formClass={'reg-form'}
         submitBtnText={'Зарегистрироваться'}
         footerText={'Уже зарегистрированы?'}
+        footerPath={'/signin'}
         footerLinkText={'Войти'}
       >
         <label className="form__label" htmlFor='reg-name'>Имя</label>
@@ -28,11 +29,6 @@ const Register = () => {
         <input type="password" id="reg-password" name="reg-password" className="form__input" placeholder='Введите пароль' />
         <span className="form__error-text"></span>
       </Form>
-
-      {/* <div className="register__bottom">
-        <p className="register__bottom-text">Уже зарегистрированы?</p>
-        <a href="f" className="register__bottom-back">Войти</a>
-      </div> */}
     </section>
   )
 }
