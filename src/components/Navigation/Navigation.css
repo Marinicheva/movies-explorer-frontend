@@ -91,7 +91,7 @@
 
   .nav__account-link {
     margin-left: 0px;
-    /*Props lower under the question*/
+    /* TODO: Props lower under the question*/
     margin-top: 621px;
   }
 
@@ -139,13 +139,18 @@
   }
 
   .nav__account-link {
-    /*Props lower under question*/
+    /* TODO: Props lower under question*/
     margin-top: 210px;
   }
 
   .hamburger {
     top: 27px;
-    right: 15px;
+    right: 22px;
+    gap: 6px;
+  }
+
+  .hamburger span {
+    width: 22px;
   }
   
 }
