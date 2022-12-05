@@ -1,17 +1,14 @@
 import React from 'react';
-import logo from '../../images/logo.png';
+
+import Greeting from '../Greeting/Greeting';
 
 import './Register.css';
 
 const Register = () => {
   return (
     <section className='register'>
-      <div className="register__top">
-      <a href='f' className='logo__link'>
-        <img src={logo} alt='Логотип проекта' className='logo' />
-      </a>
-      <h1 className='register__title'>Добро пожаловать!</h1>
-      </div>
+      <Greeting title="Добро пожаловать!" />
+      
       <form className="register__form reg-form">
         <label className="reg-form__label" htmlFor='reg-name'>Имя</label>
         <input type="text" id="reg-name" name="reg-name" className="reg-form__input" placeholder='Введите Ваше имя' />

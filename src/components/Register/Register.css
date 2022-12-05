@@ -2,15 +2,8 @@
   display: flex;
   flex-direction: column;
   align-items: start;
-  padding-top: 70px;
   margin: 0 auto;
   width: 396px;
-}
-
-.register__title {
-  margin: 35px 0;
-  font-size: 24px;
-  line-height: 1.21;
 }
 
 .register__form {
@@ -120,9 +113,6 @@
 }
 
 @media screen and (max-width: 768px) {
-  .register {
-    padding-top: 230px;
-  }
 
   .reg-form__label:first-of-type {
     margin-top: 5px;
@@ -136,20 +126,8 @@
 
 @media screen and (max-width: 400px) {
   .register {
-    padding-top: 55px;
     width: 260px;
     align-items: center;
-  }
-
-  .register__top {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .register__title {
-    margin-top: 45px;
-    margin-bottom: 73px;
   }
 
   .reg-form__submit {
