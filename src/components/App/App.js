@@ -9,7 +9,6 @@ import Register from '../Register/Register';
 import SavedMovies from '../SavedMovies/SavedMovies';
 
 import './App.css';
-// TODO: temporary const for test different view of header
 function App() {
 
   return (
