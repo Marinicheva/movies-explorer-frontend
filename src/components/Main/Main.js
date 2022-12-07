@@ -11,7 +11,7 @@ import './Main.css';
 const Main = () => {
   return (
     <div className="content">
-      <Header isLoggedIn={true} addBg={true} />
+      <Header isLoggedIn={false} addBg={true} />
       <Promo />
       <AboutProject />
       <Techs />

@@ -6,20 +6,20 @@ import Footer from '../Footer/Footer';
 
 import DB from '../../utils/fakeDB.json';
 
-import "./Movies.css";
+const SavedMovies = () => {
 
-const Movies = () => {
+  const savedMovies = DB.filter(item => item.isSaved);
 
   return (
     <>
-      <Header isLoggedIn={true} />
+    <Header isLoggedIn={true} />
       <section className='movies'>
         <SearchForm />
-        <MoviesCardList moviesList={DB} showSaveOrDeleteBtn='movie__save-btn'  />
+        <MoviesCardList moviesList={savedMovies} showSaveOrDeleteBtn='movie__delete-btn' />
       </section>
       <Footer />
     </>
   )
 }
 
-export default Movies
+export default SavedMovies

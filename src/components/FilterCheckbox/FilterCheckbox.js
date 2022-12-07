@@ -17,7 +17,6 @@ const FilterCheckbox = () => {
     <label className='checkbox__label'>
       <div
         className={checkboxBarClassNames}
-        onClick={handleToggleCheckbox}
       >
         <div className={checkboxToggleClassNames}></div>
       </div>
@@ -27,7 +26,8 @@ const FilterCheckbox = () => {
         type="checkbox"
         name="short-film"
         id="short-film"
-        checked={isChecked}
+        value={isChecked}
+        onChange={handleToggleCheckbox}
       />
       Короткометражки
     </label>

@@ -4,11 +4,9 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 
 import './MoviesCardList.css';
 
-const MoviesCardList = () => {
+const MoviesCardList = ({ moviesList, showSaveOrDeleteBtn }) => {
 
-  const arr = [...Array(16)];
-
-  if (arr.length === 0) {
+  if (!moviesList) {
     return <h2 className='movies__empty-list'>Ничего нет</h2>
   }
 
@@ -16,12 +14,12 @@ const MoviesCardList = () => {
     <>
       <ul className='movies__list'>
         {
-          arr.map((_, i) => {
-            return <MoviesCard key={i} isActive={i % 2 === 0} />
+          moviesList.map((item) => {
+            return <MoviesCard key={item.id} movieData={item} btnClassName={showSaveOrDeleteBtn} />
           })
         }
       </ul>
-      <button className="movie__more-btn">Ещё</button>
+      { moviesList.length > 15 && <button className="movie__more-btn">Ещё</button> }
     </>
   )
 }
