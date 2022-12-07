@@ -22,7 +22,6 @@ function App() {
         <Route path='/signup' element={<Register />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
-      {/* <Footer /> */}
     </div>
   );
 }
