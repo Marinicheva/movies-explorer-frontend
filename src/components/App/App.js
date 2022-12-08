@@ -4,6 +4,7 @@ import Login from '../Login/Login';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import NotFound from '../NotFound/NotFound';
+import PopupError from '../PopupError/PopupError';
 import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -22,6 +23,7 @@ function App() {
         <Route path='/signup' element={<Register />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
+      <PopupError />
     </div>
   );
 }
