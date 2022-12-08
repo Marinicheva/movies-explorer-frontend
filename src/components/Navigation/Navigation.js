@@ -1,4 +1,5 @@
 import { useCallback, useRef } from 'react';
+import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './Navigation.css';
 
@@ -23,16 +24,31 @@ const Navigation = () => {
 
   return (
     <div ref={menu} className='nav__wrapper'>
-      <nav  className='nav'>
+      <nav className='nav'>
         <ul className='nav__list'>
           <li className='nav__item'>
-            <Link to='/' className='nav__link nav__link_visible_hamburger'>Главная</Link>
+            <NavLink
+              to='/'
+              className={({ isActive }) => (`nav__link_visible_hamburger nav__link ${isActive ? 'nav__link_active' : ''}`)}
+            >
+              Главная
+            </NavLink>
           </li>
           <li className='nav__item'>
-            <Link to='/movies' className='nav__link nav__link_active'>Фильмы</Link>
+            <NavLink
+              to='/movies'
+              className={({ isActive }) => (`nav__link ${isActive ? 'nav__link_active' : ''}`)}
+            >
+              Фильмы
+            </NavLink>
           </li>
           <li className='nav__item'>
-            <Link to='/saved-movies' className='nav__link'>Сохранённые фильмы</Link>
+            <NavLink
+              to='/saved-movies'
+              className={({ isActive }) => (`nav__link ${isActive ? 'nav__link_active' : ''}`)}
+            >
+              Сохранённые фильмы
+            </NavLink>
           </li>
         </ul>
         <Link to='/profile' className='nav__link nav__account-link'>Аккаунт</Link>
@@ -42,7 +58,6 @@ const Navigation = () => {
         <span></span>
         <span></span>
       </div>
-
     </div>
 
   )
