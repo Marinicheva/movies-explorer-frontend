@@ -3,6 +3,10 @@
   align-items: center;
 }
 
+.nav__wrapper {
+  background-color: transparent;
+}
+
 .nav__list {
   display: flex;
   list-style: none;
@@ -65,20 +69,35 @@
     width: 68%;
     height: 100vh;
     background-color: white;
+    opacity: 0;
     transition: all .6s;
   }
 
-  .nav_show {
-    right: 0;
-    transition: all .6s;
+  .nav__wrapper_visible {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .3);
+    opacity: 1;
+    z-index: 1;
   }
-  
+
+  .nav__wrapper_visible .nav {
+    right: 0;
+    opacity: 1;
+    transition: all .6s;
+    z-index: 1;
+  }
+
   .nav__list {
     flex-direction: column;
     align-items: center;
     gap: 25px;
     margin-top: 160px;
   }
+
   .nav__link {
     font-size: 18px;
     font-weight: 500;
@@ -93,9 +112,12 @@
     margin-left: 0px;
     /* TODO: Props lower under the question*/
     margin-top: 621px;
+    font-size: 14px;
+    line-height: 1.14;
   }
 
   .nav__link_active {
+    padding-bottom: 5px;
     border-bottom: 1px solid #000;
   }
 
@@ -106,6 +128,7 @@
     position: absolute;
     top: 26px;
     right: 39px;
+    z-index: 1;
   }
 
   .hamburger span {
@@ -136,10 +159,10 @@
 @media screen and (max-width: 400px) {
   .nav {
     width: 100%;
+    
   }
 
   .nav__account-link {
-    /* TODO: Props lower under question*/
     margin-top: 210px;
   }
 
