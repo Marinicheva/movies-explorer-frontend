@@ -4,6 +4,8 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
 import Footer from '../Footer/Footer';
 
+import "./SavedMovies.css";
+
 import DB from '../../utils/fakeDB.json';
 
 const SavedMovies = () => {
@@ -13,7 +15,7 @@ const SavedMovies = () => {
   return (
     <>
     <Header isLoggedIn={true} />
-      <section className='movies'>
+      <section className='saved-movies'>
         <SearchForm />
         <MoviesCardList moviesList={savedMovies} showSaveOrDeleteBtn='movie__delete-btn' />
       </section>

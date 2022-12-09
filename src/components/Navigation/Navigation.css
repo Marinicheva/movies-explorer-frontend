@@ -110,7 +110,6 @@
 
   .nav__account-link {
     margin-left: 0px;
-    /* TODO: Props lower under the question*/
     margin-top: 621px;
     font-size: 14px;
     line-height: 1.14;
@@ -152,23 +151,26 @@
     display: none;
     opacity: 0;
     transition: all .6s;
-  }
-  
+  } 
 }
 
 @media screen and (max-width: 400px) {
   .nav {
     width: 100%;
-    
+  }
+
+  .nav__list {
+    margin-top: 145px;
+    gap: 22px;
   }
 
   .nav__account-link {
-    margin-top: 210px;
+    margin-top: 443px;
   }
 
   .hamburger {
-    top: 27px;
-    right: 22px;
+    top: 28px;
+    right: 23px;
     gap: 6px;
   }
 
