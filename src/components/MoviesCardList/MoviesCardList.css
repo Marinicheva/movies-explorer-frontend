@@ -52,6 +52,7 @@
 @media screen and (max-width: 450px) {
   .movies__list {
     grid-template-columns: 1fr;
+    gap: 33px;
     margin-top: 50px;
   }
 
