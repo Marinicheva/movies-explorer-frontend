@@ -35,7 +35,11 @@
   height: 16px;
   background-color: var(--white);
   border-radius: 50%;
-  transition: transform .6s;
+  transition: all .6s;
+}
+
+.checkbox__bar:hover .checkbox__toggle_off {
+  opacity: .85;
 }
 
 .checkbox__toggle_off {

@@ -42,6 +42,11 @@
   background-color: transparent;
   border: none;
   transition: background-color .6s;
+  cursor: pointer;
+}
+
+.search__input:hover {
+  background-color: var(--white);
 }
 
 .search__input::placeholder {
@@ -53,10 +58,6 @@
 .search__input:focus {
   background-color: var(--white);
   outline: 1px solid var(--text-grey);
-}
-
-.search__input:invalid {
-  outline-color: var(--warn-red);
 }
 
 .search__submit-btn {
