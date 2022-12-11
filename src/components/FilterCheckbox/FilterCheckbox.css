@@ -9,7 +9,7 @@
   font-size: 13px;
   line-height: 1.38;
   color: var(--black);
-  border-left: 1px solid var(--techs-items-grey);
+  border-left: 1px solid var(---basic-grey);
 }
 
 .checkbox__bar {
@@ -24,7 +24,7 @@
 }
 
 .checkbox__bar_on {
-  background-color: var(--accent-green);
+  background-color: var(--green);
   transition: background-color .6s;
 }
 

@@ -9,7 +9,7 @@
 
 .search__container {
   padding: 70px 0;
-  border-bottom: 1px solid var(--techs-items-grey);
+  border-bottom: 1px solid var(---basic-grey);
 }
 
 .search__label-input {

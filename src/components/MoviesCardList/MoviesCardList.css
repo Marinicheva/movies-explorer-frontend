@@ -17,7 +17,7 @@
   line-height: 1.25;
   font-weight: 500;
   background-color: transparent;
-  border: 1px solid var(--techs-items-grey);
+  border: 1px solid var(---basic-grey);
   cursor: pointer;
   transition: opacity .6s;
 }

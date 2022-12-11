@@ -23,7 +23,7 @@
 
 .portfolio__item {
   padding: 0;
-  border-bottom: 1px solid var(--techs-items-grey);
+  border-bottom: 1px solid var(---basic-grey);
 }
 
 .portfolio__link {

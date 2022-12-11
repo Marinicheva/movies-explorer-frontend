@@ -44,7 +44,7 @@
   line-height: 1.2;
   letter-spacing: -0.04em;
   text-align: center;
-  background-color: var(--techs-items-grey);
+  background-color: var(---basic-grey);
   border-radius: 10px;
   box-sizing: border-box;
 }
