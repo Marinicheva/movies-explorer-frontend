@@ -55,6 +55,10 @@
   outline: 1px solid var(--text-grey);
 }
 
+.search__input:invalid {
+  outline-color: var(--warn-red);
+}
+
 .search__submit-btn {
   padding: 0;
   margin: 0;
