@@ -6,8 +6,8 @@ import NavTab from '../NavTab/NavTab';
 
 import './Header.css';
 
-const Header = ({ isLoggedIn, addBg }) => {
-  const headerClassNames = `header ${addBg ? 'header_on_landing' : ''}`;
+const Header = ({ isLoggedIn, withBg }) => {
+  const headerClassNames = `header ${withBg ? "header_on_landing" : ''}`;
 
   return (
     <header className={headerClassNames}>

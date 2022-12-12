@@ -4,7 +4,7 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 
 import './MoviesCardList.css';
 
-const MoviesCardList = ({ moviesList, showSaveOrDeleteBtn }) => {
+const MoviesCardList = ({ moviesList, movieBtnClassName }) => {
   const [deviceWidth, setDeviceWidth] = useState(window.screen.width);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const MoviesCardList = ({ moviesList, showSaveOrDeleteBtn }) => {
 
 
   if (!moviesList) {
-    return <h2 className='movies__empty-list'>Ничего нет</h2>
+    return <h2 className="movies__empty-list">Ничего нет</h2>
   }
 
   const moviesCount = deviceWidth < 451 ? 5 : deviceWidth < 851 ? 8 : 16;
@@ -30,10 +30,10 @@ const MoviesCardList = ({ moviesList, showSaveOrDeleteBtn }) => {
 
   return (
     <>
-      <ul className='movies__list'>
+      <ul className="movies__list">
         {
           visibleMovies.map((item) => {
-            return <MoviesCard key={item.id} movieData={item} btnClassName={showSaveOrDeleteBtn} />
+            return <MoviesCard key={item.id} movieData={item} btnClassName={movieBtnClassName} />
           })
         }
       </ul>

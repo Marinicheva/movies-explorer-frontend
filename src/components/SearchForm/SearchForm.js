@@ -5,17 +5,17 @@ import "./SearchForm.css";
 const SearchForm = () => {
   return (
     <div className="search__container">
-      <form className='search'>
+      <form className="search">
         <label className="search__label-input">
           <input
-            className='search__input'
+            className="search__input"
             type="text"
             id="movie"
-            placeholder='Фильм'
+            placeholder="Фильм"
             required
           />
         </label>
-        <button className='search__submit-btn' type='submit'>&#8250;</button>
+        <button className="search__submit-btn" type="submit">&#8250;</button>
         <FilterCheckbox />
       </form>
     </div>

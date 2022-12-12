@@ -6,7 +6,7 @@ import Footer from '../Footer/Footer';
 
 import DB from '../../utils/fakeDB.json';
 
-import "./Movies.css";
+import './Movies.css';
 import Preloader from '../Preloader/Preloader';
 
 const Movies = () => {
@@ -21,9 +21,9 @@ const Movies = () => {
   return (
     <>
       <Header isLoggedIn={true} />
-      <section className='movies'>
+      <section className="movies"  >
         <SearchForm />
-        { isLoading ? <Preloader /> : <MoviesCardList moviesList={DB} showSaveOrDeleteBtn='movie__save-btn'  /> }
+        { isLoading ? <Preloader /> : <MoviesCardList moviesList={DB} movieBtnClassName="movie__save-btn"  /> }
       </section>
       <Footer />
     </>

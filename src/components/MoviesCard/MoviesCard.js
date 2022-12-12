@@ -9,7 +9,7 @@ const MoviesCard = ({ movieData, btnClassName }) => {
   const movieBtnClassNames = btnClassName + (isSaved ? ' movie__save-btn_active' : '');
 
   return (
-    <li className='movies__item movie'>
+    <li className="movies__item movie">
       <img src={image.url} alt="Постер фильма" className="movie__img" />
       <h3 className="movie__title">{name}</h3>
       <button className={movieBtnClassNames}></button>

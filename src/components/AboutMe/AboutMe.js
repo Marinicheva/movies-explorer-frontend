@@ -1,8 +1,7 @@
 import React from 'react';
 
 import avatar from '../../images/student_foto.jpg';
-
-import "./AboutMe.css";
+import './AboutMe.css';
 
 const AboutMe = () => {
   return (

@@ -9,7 +9,7 @@ import Footer from '../Footer/Footer';
 const Main = () => {
   return (
     <div className="content">
-      <Header isLoggedIn={false} addBg={true} />
+      <Header isLoggedIn={false} withBg={true} />
       <Promo />
       <AboutProject />
       <Techs />

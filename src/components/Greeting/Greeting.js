@@ -6,7 +6,7 @@ const Greeting = ({ title }) => {
   return (
     <div className="greeting">
       <Logo />
-      <h1 className='greeting__title'>{title}</h1>
+      <h1 className="greeting__title">{title}</h1>
     </div>
   )
 }

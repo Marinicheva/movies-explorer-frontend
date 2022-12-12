@@ -7,7 +7,7 @@ import './Register.css';
 
 const Register = () => {
   return (
-    <section className='register'>
+    <section className="register">
       <Greeting title="Добро пожаловать!" />
 
       <Form
@@ -17,35 +17,35 @@ const Register = () => {
         footerPath={'/signin'}
         footerLinkText={'Войти'}
       >
-        <label className="form__label" htmlFor='reg-name'>Имя</label>
+        <label className="form__label" htmlFor="reg-name">Имя</label>
         <input
           type="text"
           id="reg-name"
           name="reg-name"
           className="form__input"
-          placeholder='Введите имя'
+          placeholder="Введите имя"
           required
         />
         <span className="form__error-text"></span>
 
-        <label className="form__label" htmlFor='reg-email'>E-mail</label>
+        <label className="form__label" htmlFor="reg-email">E-mail</label>
         <input
           type="email"
           id="reg-email"
           name="reg-email"
           className="form__input"
-          placeholder='Введите e-mail'
+          placeholder="Введите e-mail"
           required
         />
         <span className="form__error-text"></span>
 
-        <label className="form__label" htmlFor='reg-password'>Пароль</label>
+        <label className="form__label" htmlFor="reg-password">Пароль</label>
         <input
           type="password"
           id="reg-password"
           name="reg-password"
           className="form__input"
-          placeholder='Введите пароль'
+          placeholder="Введите пароль"
           required
         />
         <span className="form__error-text"></span>

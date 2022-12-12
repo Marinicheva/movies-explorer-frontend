@@ -15,7 +15,7 @@ const Profile = () => {
   return (
     <>
       <Header isLoggedIn={true} />
-      <section className='profile'>
+      <section className="profile">
         <h1 className="profile__title">Привет, Виталий!</h1>
 
         <form className="edit-form">
@@ -41,7 +41,7 @@ const Profile = () => {
               onChange={(evt) => handleChangeUserData(evt)}
             />
           </label>
-          <button className='edit-form__submit'>Редактировать</button>
+          <button className="edit-form__submit">Редактировать</button>
         </form>
         <button className="profile__exit">Выйти из аккаунта</button>
       </section>

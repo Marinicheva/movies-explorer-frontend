@@ -1,6 +1,7 @@
 import { useCallback, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+
 import './Navigation.css';
 
 const Navigation = () => {
@@ -23,37 +24,37 @@ const Navigation = () => {
   }
 
   return (
-    <div ref={menu} className='nav__wrapper'>
-      <nav className='nav'>
-        <ul className='nav__list'>
-          <li className='nav__item'>
+    <div ref={menu} className="nav__wrapper">
+      <nav className="nav">
+        <ul className="nav__list">
+          <li className="nav__item">
             <NavLink
-              to='/'
+              to="/"
               className={({ isActive }) => (`nav__link_visible_hamburger nav__link ${isActive ? 'nav__link_active' : ''}`)}
             >
               Главная
             </NavLink>
           </li>
-          <li className='nav__item'>
+          <li className="nav__item">
             <NavLink
-              to='/movies'
+              to="/movies"
               className={({ isActive }) => (`nav__link ${isActive ? 'nav__link_active' : ''}`)}
             >
               Фильмы
             </NavLink>
           </li>
-          <li className='nav__item'>
+          <li className="nav__item">
             <NavLink
-              to='/saved-movies'
+              to="/saved-movies"
               className={({ isActive }) => (`nav__link ${isActive ? 'nav__link_active' : ''}`)}
             >
               Сохранённые фильмы
             </NavLink>
           </li>
         </ul>
-        <Link to='/profile' className='nav__link nav__account-link'>Аккаунт</Link>
+        <Link to="/profile" className="nav__link nav__account-link">Аккаунт</Link>
       </nav>
-      <div ref={hamburger} className='hamburger' onClick={handleClickHamburger}>
+      <div ref={hamburger} className="hamburger" onClick={handleClickHamburger}>
         <span></span>
         <span></span>
         <span></span>

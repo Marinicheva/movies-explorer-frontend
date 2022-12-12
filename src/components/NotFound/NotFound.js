@@ -11,7 +11,7 @@ const NotFound = () => {
   
   return (
     <section className="not-found">
-      <h1 className='not-found__title'>Страница не найдена</h1>
+      <h1 className="not-found__title">Страница не найдена</h1>
       <p className="not-found__subtitle">404</p>
       <button className="not-found__back" onClick={handleClickGoBack}>Назад</button>
     </section>

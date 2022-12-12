@@ -177,5 +177,12 @@
   .hamburger span {
     width: 22px;
   }
-  
+
+  .hamburger_opened span:first-of-type {
+    transform: rotate(45deg) translate(3px, -4px);
+  }
+
+  .hamburger_opened span:nth-last-of-type(2){
+    transform: rotate(135deg) translate(-10px, 3px);
+  }
 }
