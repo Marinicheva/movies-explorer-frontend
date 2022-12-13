@@ -1,15 +1,27 @@
-.nav__tab {
+.nav-tab {
   display: flex;
   align-items: center;
 }
 
-.nav__link_signup {
+.nav-tab__link {
+  font-size: 14px;
+  line-height: 1.29;
+  color: var(--black);
+  text-decoration: none;
+  transition: opacity .6s;
+}
+
+.nav-tab__link:hover {
+  opacity: .5;
+}
+
+.nav-tab__link_signup {
   font-size: 12px;
   line-height: 1.33;
   font-weight: 500;
 }
 
-.nav__link_signin {
+.nav-tab__link_signin {
   display: block;
   margin-left: 30px;
   padding: 8px 20px;
@@ -25,12 +37,12 @@
 }
 
 @media screen and (max-width: 400px) {
-  .nav__link_signup {
+  .nav-tab__link_signup {
     font-size: 10px;
     line-height: 1.6;
   }
   
-  .nav__link_signin {
+  .nav-tab__link_signin {
     margin-left: 15px;
     padding: 5px 12px;
     width: 54px;
