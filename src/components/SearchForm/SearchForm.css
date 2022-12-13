@@ -1,3 +1,8 @@
+.search-container {
+  padding: 70px 0;
+  border-bottom: 1px solid var(---basic-grey);
+}
+
 .search {
   display: flex;
   justify-content: space-between;
@@ -5,11 +10,6 @@
   padding: 0 30px;
   height: 72px;
   background-color: var(--elem-bg-grey);
-}
-
-.search__container {
-  padding: 70px 0;
-  border-bottom: 1px solid var(---basic-grey);
 }
 
 .search__label-input {
