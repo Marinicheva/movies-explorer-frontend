@@ -43,11 +43,11 @@
 }
 
 .checkbox__toggle_off {
-  transform: translateX(0);
+  transform: translateX(2px);
 }
 
 .checkbox__toggle_on {
-  transform: translateX(125%);
+  transform: translateX(115%);
 }
 
 
