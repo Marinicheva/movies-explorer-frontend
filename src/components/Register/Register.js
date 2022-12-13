@@ -24,6 +24,8 @@ const Register = () => {
           name="reg-name"
           className="form__input"
           placeholder="Введите имя"
+          minLength={2}
+          maxLength={30}
           required
         />
         <span className="form__error-text"></span>
