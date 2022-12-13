@@ -96,7 +96,7 @@
   }
 
   .portfolio__link::after {
-    top: 2px;
+    top: 19px;
     right: -10px;
   }
 }
