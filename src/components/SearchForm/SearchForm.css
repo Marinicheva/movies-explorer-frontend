@@ -80,7 +80,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .search__container {
+  .search-container {
     padding-top: 80px;
     padding-bottom: 110px;
   }

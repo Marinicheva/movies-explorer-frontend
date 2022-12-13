@@ -56,6 +56,7 @@
   .checkbox {
     padding: 0;
     margin: 0 auto;
+    min-height: auto;
     font-size: 11px;
     line-height: 1.64;
     border-left: none;
