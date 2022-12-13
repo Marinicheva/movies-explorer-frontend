@@ -24,7 +24,7 @@ const Navigation = () => {
   }
 
   return (
-    <div ref={menu} className="nav__wrapper">
+    <div ref={menu} className="nav-wrapper">
       <nav className="nav">
         <ul className="nav__list">
           <li className="nav__item">

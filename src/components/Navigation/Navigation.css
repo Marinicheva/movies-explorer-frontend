@@ -1,10 +1,10 @@
+.nav-wrapper {
+  background-color: transparent;
+}
+
 .nav {
   display: flex;
   align-items: center;
-}
-
-.nav__wrapper {
-  background-color: transparent;
 }
 
 .nav__list {
@@ -73,7 +73,7 @@
     transition: all .6s;
   }
 
-  .nav__wrapper_visible {
+  .nav-wrapper_visible {
     position: fixed;
     top: 0;
     left: 0;
@@ -84,7 +84,7 @@
     z-index: 2;
   }
 
-  .nav__wrapper_visible .nav {
+  .nav-wrapper_visible .nav {
     right: 0;
     opacity: 1;
     transition: all .6s;
