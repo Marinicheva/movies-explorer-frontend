@@ -5,18 +5,18 @@ const Form = ({ formClass, submitBtnText, children, footerText, footerPath, foot
   const formClassNames = `form ${formClass}`;
 
   return (
-    <>
+    <div className='form-container'>
       <form className={formClassNames}>
         {
           children
         }
         <button type="submit" className="form__submit-btn">{submitBtnText}</button>
       </form>
-      <div className="form__footer">
-        <p className="form__footer-text">{footerText}</p>
-        <Link to={footerPath} className="form__footer-back">{footerLinkText}</Link>
+      <div className="form-container__bottom">
+        <p className="form-container__text">{footerText}</p>
+        <Link to={footerPath} className="form-container__back">{footerLinkText}</Link>
       </div>
-    </>
+    </div>
   )
 }
 
