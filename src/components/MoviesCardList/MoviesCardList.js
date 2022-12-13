@@ -30,7 +30,7 @@ const MoviesCardList = ({ moviesList, movieBtnClassName }) => {
 
   return (
     <>
-      <ul className="movies__list">
+      <ul className="movies-list">
         {
           visibleMovies.map((item) => {
             return <MoviesCard key={item.id} movieData={item} btnClassName={movieBtnClassName} />
