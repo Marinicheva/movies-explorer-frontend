@@ -28,7 +28,7 @@
   font-weight: 500;
   color: var(--black);
   border: none;
-  border-bottom: 1px solid var(---basic-grey);
+  border-bottom: 1px solid var(--basic-grey);
   transition: border-bottom-color .6s;
 }
 

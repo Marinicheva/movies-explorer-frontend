@@ -86,7 +86,7 @@
 .movie__bottom {
   grid-area: duration;
   padding-top: 5px;
-  border-top: 1px solid var(---basic-grey);
+  border-top: 1px solid var(--basic-grey);
 }
 
 .movie__duration {
