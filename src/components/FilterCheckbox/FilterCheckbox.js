@@ -13,7 +13,7 @@ const FilterCheckbox = () => {
   }
 
   return (
-    <label className="checkbox__label">
+    <label className="checkbox">
       <div
         className={checkboxBarClassNames}
       >
@@ -21,7 +21,7 @@ const FilterCheckbox = () => {
       </div>
       <input
         ref={checkbox}
-        className="checkbox"
+        className="checkbox__input"
         type="checkbox"
         name="short-film"
         id="short-film"
