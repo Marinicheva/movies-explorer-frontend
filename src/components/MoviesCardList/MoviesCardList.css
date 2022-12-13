@@ -7,7 +7,7 @@
   list-style: none;
 }
 
-.movie__more-btn {
+.movies__more-btn {
   display: block;
   margin: 0 auto;
   padding: 10px 0;
@@ -56,7 +56,7 @@
     margin-top: 50px;
   }
 
-  .movie__more-btn {
+  .movies__more-btn {
     width: 240px;
     height: 36px;
   }
