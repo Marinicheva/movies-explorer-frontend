@@ -1,6 +1,6 @@
 .portfolio {
   padding: 0 70px;
-  margin-bottom: 145px;
+  margin-bottom: 180px;
 }
 
 .portfolio__title {
@@ -23,7 +23,7 @@
 
 .portfolio__item {
   padding: 0;
-  border-bottom: 1px solid var(---basic-grey);
+  border-bottom: 1px solid var(--basic-grey);
 }
 
 .portfolio__link {
