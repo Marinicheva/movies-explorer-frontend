@@ -10,7 +10,6 @@ const MoviesCard = ({ movieData, btnClassName }) => {
   const movieBtnClassNames = btnClassName !== 'movie__save-btn' ? btnClassName : (btnClassName + (isSaved ? ' movie__save-btn_active' : ''));
 
   return (
-<<<<<<< HEAD
     <li className="movies__item movie">
       <img
         src={`${MOVIES_URL}${image.url}`}
@@ -18,11 +17,6 @@ const MoviesCard = ({ movieData, btnClassName }) => {
         className="movie__img"
       />
       <h3 className="movie__title">{nameRU}</h3>
-=======
-    <li className="movie">
-      <img src={image.url} alt="Постер фильма" className="movie__img" />
-      <h3 className="movie__title">{name}</h3>
->>>>>>> level-2
       <button className={movieBtnClassNames}></button>
       <div className="movie__bottom">
         <p className="movie__duration">{durationStr}</p>

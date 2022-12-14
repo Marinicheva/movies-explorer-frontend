@@ -21,17 +21,12 @@ const FilterCheckbox = ({ onChangeCheckbox }) => {
         <div className={checkboxToggleClassNames}></div>
       </div>
       <input
-<<<<<<< HEAD
-        className="checkbox"
-=======
-        ref={checkbox}
         className="checkbox__input"
->>>>>>> level-2
         type="checkbox"
         name="short-film"
         id="short-film"
         value={isChecked}
-        onChange={handleToggleCheckbox}
+        onChange={handleToggleCheckbox}        
       />
       Короткометражки
     </label>

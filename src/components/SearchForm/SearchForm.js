@@ -34,7 +34,7 @@ const SearchForm = ({ onSearchMovies }) => {
           />
         </label>
         <button className="search__submit-btn" type="submit"></button>
-        <FilterCheckbox />
+        <FilterCheckbox onChangeCheckbox={onChangeCheckbox} />
       </form>
     </div>
   )
