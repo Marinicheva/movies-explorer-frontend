@@ -15,7 +15,7 @@ const SearchForm = () => {
             required
           />
         </label>
-        <button className="search__submit-btn" type="submit">&#8250;</button>
+        <button className="search__submit-btn" type="submit"></button>
         <FilterCheckbox />
       </form>
     </div>

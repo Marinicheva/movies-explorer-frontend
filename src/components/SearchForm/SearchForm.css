@@ -68,6 +68,10 @@
   width: 34px;
   height: 34px;
   color: var(--white);
+  background-image: url('../../images/search-btn-arrow.svg');
+  background-position: center center;
+  background-size: 5px 12px;
+  background-repeat: no-repeat;
   background-color: var(--blue);
   border: none;
   border-radius: 50%;
