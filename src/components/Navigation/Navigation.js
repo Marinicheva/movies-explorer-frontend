@@ -11,14 +11,14 @@ const Navigation = () => {
 
   const handleCloseMenuByOverlay = useCallback((evt) => {
     if (evt.target === menu.current) {
-      menu.current.classList.remove('nav__wrapper_visible');
+      menu.current.classList.remove('nav-wrapper_visible');
       hamburger.current.classList.remove('hamburger_opened');
       document.removeEventListener('click', handleCloseMenuByOverlay);
     }
   }, []);
 
   const handleClickHamburger = () => {
-    menu.current.classList.toggle('nav__wrapper_visible');
+    menu.current.classList.toggle('nav-wrapper_visible');
     hamburger.current.classList.toggle('hamburger_opened');
     document.addEventListener('click', handleCloseMenuByOverlay);
   }

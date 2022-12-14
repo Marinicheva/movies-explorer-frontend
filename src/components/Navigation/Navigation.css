@@ -88,7 +88,7 @@
     right: 0;
     opacity: 1;
     transition: all .6s;
-    z-index: 1;
+    z-index: 2;
   }
 
   .nav__list {
@@ -127,7 +127,7 @@
     position: absolute;
     top: 26px;
     right: 39px;
-    z-index: 1;
+    z-index: 2;
   }
 
   .hamburger span {
