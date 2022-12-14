@@ -15,7 +15,7 @@ const AboutMe = () => {
             и дочь. Я люблю читать, а ещё увлекаюсь вязанием. Недавно начала кодить. С 2013 года работала в снабжении. После того, как завершения курса по веб-разработке планирую свою жизнь плотно связать с кодингом и веб-разработкой.</p>
           <a href="https://github.com/Marinicheva" className="about-me__git-link" target="blank">Github</a>
         </div>
-        <img src={avatar} alt="Фото студента" className="about-me_photo" />
+        <img src={avatar} alt="Фото студента" className="about-me__photo" />
       </div>
     </section>
   )

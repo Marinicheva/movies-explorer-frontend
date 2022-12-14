@@ -1,15 +1,16 @@
 .checkbox {
-  display: none;
-}
-
-.checkbox__label {
   display: flex;
   align-items: center;
   padding-left: 30px;
+  min-height: 40px;
   font-size: 13px;
   line-height: 1.38;
   color: var(--black);
-  border-left: 1px solid var(---basic-grey);
+  border-left: 1px solid var(--basic-grey);
+}
+
+.checkbox__input {
+  display: none;
 }
 
 .checkbox__bar {
@@ -43,18 +44,19 @@
 }
 
 .checkbox__toggle_off {
-  transform: translateX(0);
+  transform: translateX(2px);
 }
 
 .checkbox__toggle_on {
-  transform: translateX(125%);
+  transform: translateX(115%);
 }
 
 
 @media screen and (max-width: 620px) {
-  .checkbox__label {
+  .checkbox {
     padding: 0;
     margin: 0 auto;
+    min-height: auto;
     font-size: 11px;
     line-height: 1.64;
     border-left: none;

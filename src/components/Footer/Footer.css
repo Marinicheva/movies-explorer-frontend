@@ -14,7 +14,7 @@
   font-weight: 400;
   text-align: center;
   color: var(--text-grey);
-  border-bottom: 1px solid var(---basic-grey);
+  border-bottom: 1px solid var(--basic-grey);
 }
 
 .footer__bottom {

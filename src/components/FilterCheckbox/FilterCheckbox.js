@@ -14,14 +14,19 @@ const FilterCheckbox = ({ onChangeCheckbox }) => {
   }
 
   return (
-    <label className="checkbox__label">
+    <label className="checkbox">
       <div
         className={checkboxBarClassNames}
       >
         <div className={checkboxToggleClassNames}></div>
       </div>
       <input
+<<<<<<< HEAD
         className="checkbox"
+=======
+        ref={checkbox}
+        className="checkbox__input"
+>>>>>>> level-2
         type="checkbox"
         name="short-film"
         id="short-film"

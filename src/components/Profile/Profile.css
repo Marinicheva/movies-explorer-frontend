@@ -34,7 +34,7 @@
 .edit-form__label:last-of-type {
   margin-bottom: 210px;
   padding-top: 12px;
-  border-top: 1px solid var(---basic-grey);
+  border-top: 1px solid var(--basic-grey);
 }
 
 .edit-form__input {
@@ -49,13 +49,13 @@
 }
 
 .edit-form__input:hover {
-  background-color: var(---basic-grey);
+  background-color: var(--basic-grey);
 }
 
 .edit-form__input:focus {
   text-align: left;
   outline: none;
-  background-color: var(---basic-grey);
+  background-color: var(--basic-grey);
 }
 
 .edit-form__submit {

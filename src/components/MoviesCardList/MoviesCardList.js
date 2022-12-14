@@ -30,14 +30,14 @@ const MoviesCardList = ({ moviesList, movieBtnClassName }) => {
 
   return (
     <>
-      <ul className="movies__list">
+      <ul className="movies-list">
         {
           visibleMovies.map((item) => {
             return <MoviesCard key={item.id} movieData={item} btnClassName={movieBtnClassName} />
           })
         }
       </ul>
-      { moviesList.length > 15 && <button className="movie__more-btn">Ещё</button> }
+      { moviesList.length > 15 && <button className="movies__more-btn">Ещё</button> }
     </>
   )
 }

@@ -20,11 +20,8 @@ const SearchForm = ({ onSearchMovies }) => {
   }
 
   return (
-    <div className="search__container">
-      <form
-        className="search"
-        onSubmit={(evt) => handleSubmitSearchForm(evt)}
-      >
+    <div className="search-container">
+      <form className="search" onSubmit={(evt) => handleSubmitSearchForm(evt)}>
         <label className="search__label-input">
           <input
             className="search__input"
@@ -36,13 +33,8 @@ const SearchForm = ({ onSearchMovies }) => {
             required
           />
         </label>
-        <button
-          className="search__submit-btn"
-          type="submit"
-        >
-          &#8250;
-        </button>
-        <FilterCheckbox onChangeCheckbox={onChangeCheckbox} />
+        <button className="search__submit-btn" type="submit"></button>
+        <FilterCheckbox />
       </form>
     </div>
   )
