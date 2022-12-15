@@ -17,8 +17,10 @@ const SearchForm = ({ onSearchMovies }) => {
 
   const handleSubmitSearchForm = (evt) => {
     evt.preventDefault();
+    
     onSearchMovies(searchValue, isShowShortMovies);
     localStorage.setItem('searchingValue', searchValue);
+    localStorage.setItem('checkboxValue', isShowShortMovies);
   }
 
   const onChangeCheckbox = (value) => {

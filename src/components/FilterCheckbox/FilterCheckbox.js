@@ -9,15 +9,14 @@ const FilterCheckbox = ({ onChangeCheckbox }) => {
   const checkboxToggleClassNames = `checkbox__toggle ${isChecked ? "checkbox__toggle_on" : "checkbox__toggle_off"}`;
 
   useEffect(() => {
-    const checkboxValue = localStorage.getItem('checkboxValue') || false;
+    const checkboxValue = localStorage.getItem('checkboxValue');
 
-    setIsChecked(checkboxValue);
+    setIsChecked(!!checkboxValue);
   }, [])
 
   const handleToggleCheckbox = (evt) => {
     setIsChecked(evt.target.checked);
     onChangeCheckbox(evt.target.checked);
-    localStorage.setItem('checkboxValue', evt.target.checked);
   }
 
   return (
@@ -32,7 +31,7 @@ const FilterCheckbox = ({ onChangeCheckbox }) => {
         type="checkbox"
         name="short-movie"
         id="short-movie"
-        value={isChecked}
+        checked={isChecked}
         onChange={handleToggleCheckbox}        
       />
       Короткометражки
