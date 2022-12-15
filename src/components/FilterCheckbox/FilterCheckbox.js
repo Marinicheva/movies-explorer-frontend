@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import './FilterCheckbox.css';
 
@@ -8,9 +8,16 @@ const FilterCheckbox = ({ onChangeCheckbox }) => {
   const checkboxBarClassNames = `checkbox__bar ${isChecked ? "checkbox__bar_on" : ''}`;
   const checkboxToggleClassNames = `checkbox__toggle ${isChecked ? "checkbox__toggle_on" : "checkbox__toggle_off"}`;
 
+  useEffect(() => {
+    const checkboxValue = localStorage.getItem('checkboxValue') || false;
+
+    setIsChecked(checkboxValue);
+  }, [])
+
   const handleToggleCheckbox = (evt) => {
     setIsChecked(evt.target.checked);
-    onChangeCheckbox(evt.target.checked)
+    onChangeCheckbox(evt.target.checked);
+    localStorage.setItem('checkboxValue', evt.target.checked);
   }
 
   return (
@@ -23,8 +30,8 @@ const FilterCheckbox = ({ onChangeCheckbox }) => {
       <input
         className="checkbox__input"
         type="checkbox"
-        name="short-film"
-        id="short-film"
+        name="short-movie"
+        id="short-movie"
         value={isChecked}
         onChange={handleToggleCheckbox}        
       />
