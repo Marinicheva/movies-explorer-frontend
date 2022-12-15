@@ -5,30 +5,41 @@ import SearchForm from '../SearchForm/SearchForm';
 import Footer from '../Footer/Footer';
 
 import moviesApi from '../../utils/MoviesApi';
+import { DEFAULT_API_ERROR_TEXT } from '../../utils//constants';
 
 import './Movies.css';
 import Preloader from '../Preloader/Preloader';
 
-const Movies = () => {
+const Movies = ({ onOpenPopup }) => {
   const [ isLoading, setIsLoading ] = useState(true);
   const [ movies, setMovies ] = useState([]);
-  const [ visibleMovies, setVisibleMovies ] = useState(null);
+  const [ findedMovies, setFindedMovies ] = useState(null);
 
   useEffect(() => {
     moviesApi.getMovies()
       .then((movies) => setMovies(movies))
-      .then(() => setIsLoading(false));
-  }, []);
+      .catch(err => {
+        onOpenPopup(DEFAULT_API_ERROR_TEXT);
+      })
+      .finally(setIsLoading(false));
+  }, [onOpenPopup]);
 
+
+  // При сабмите поиска => запускаем прелоадер => фильтруем фильмы => отключаем прелоадер
   const onSearchMovies = (searchStr, isShortFilms) => {
-    setVisibleMovies(movies.filter(item => {
+    setIsLoading(true);
+
+    // TODO: Оставлять ли таймаут ???
+    setTimeout(() => {
+      setFindedMovies(movies.filter(item => {
       return (
         (isShortFilms
         ? item.duration <= 40 
-        : item)
+        : true)
         && item.nameRU.toLowerCase().includes(searchStr.toLowerCase())
-      );
-    }));
+      )}));
+      setIsLoading(false);
+      }, 500);
   };
 
   return (
@@ -39,7 +50,7 @@ const Movies = () => {
         { isLoading
         ? <Preloader />
         : <MoviesCardList
-            moviesList={visibleMovies}
+            moviesList={findedMovies}
             movieBtnClassName="movie__save-btn"
           /> }
       </section>
