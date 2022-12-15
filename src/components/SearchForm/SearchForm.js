@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import "./SearchForm.css";
 
 const SearchForm = ({ onSearchMovies }) => {
   const [ searchStr, setSearchStr ] = useState('');
   const [ isShowShortMovies, setIsShowShortMovies ] = useState(false);
+
+  useEffect(() => {
+    const searchValue = localStorage.getItem('searchingValue') || '';
+    setSearchStr(searchValue)
+  }, []);
 
   const onChangeSearchInput = (evt) => {
     setSearchStr(evt.target.value);
@@ -13,6 +18,7 @@ const SearchForm = ({ onSearchMovies }) => {
   const handleSubmitSearchForm = (evt) => {
     evt.preventDefault();
     onSearchMovies(searchStr, isShowShortMovies);
+    localStorage.setItem('searchingValue', searchStr);
   }
 
   const onChangeCheckbox = (value) => {
