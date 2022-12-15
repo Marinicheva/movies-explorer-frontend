@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { MOVIES_URL } from '../../utils/constants';
 import './MoviesCard.css';
 
 const MoviesCard = ({ movieData, btnClassName }) => {
-  const { nameRU, duration, isSaved, image, trailerLink } = movieData;
+  const [ isSaved, setIsSaved ] = useState(false);
+  const { nameRU, duration, image, trailerLink } = movieData;
   const durationStr = `${Math.floor(duration / 60)}ч ${duration % 60 > 9 ? duration % 60 : '0' + duration % 60}м`;
 
-  const movieBtnClassNames = btnClassName !== 'movie__save-btn' ? btnClassName : (btnClassName + (isSaved ? ' movie__save-btn_active' : ''));
+  const savedClassName = isSaved ? ' movie__save-btn_active' : '';
+  const movieBtnClassNames = btnClassName !== 'movie__save-btn' ? btnClassName : (btnClassName + savedClassName);
   
-  const click = (evt) => {
-    console.log(evt.target);
+  const handleClickSaveBtn = () => {
+    // Послать соответвующий запрос в зав-сти от того сохранен или нет
+    setIsSaved(state => !state);
   }
 
   return (
@@ -29,7 +32,7 @@ const MoviesCard = ({ movieData, btnClassName }) => {
         className="movie__img"
       />
       <h3 className="movie__title">{nameRU}</h3>
-      <button className={movieBtnClassNames} onClick={(evt) => click(evt)}></button>
+      <button className={movieBtnClassNames} onClick={handleClickSaveBtn}></button>
       <div className="movie__bottom">
         <p className="movie__duration">{durationStr}</p>
       </div>
