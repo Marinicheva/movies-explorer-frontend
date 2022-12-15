@@ -3,22 +3,22 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import "./SearchForm.css";
 
 const SearchForm = ({ onSearchMovies }) => {
-  const [ searchStr, setSearchStr ] = useState('');
+  const [ searchValue, setSearchValue ] = useState('');
   const [ isShowShortMovies, setIsShowShortMovies ] = useState(false);
 
   useEffect(() => {
-    const searchValue = localStorage.getItem('searchingValue') || '';
-    setSearchStr(searchValue)
+    const searchingValue = localStorage.getItem('searchingValue') || '';
+    setSearchValue(searchingValue)
   }, []);
 
   const onChangeSearchInput = (evt) => {
-    setSearchStr(evt.target.value);
+    setSearchValue(evt.target.value);
   }
 
   const handleSubmitSearchForm = (evt) => {
     evt.preventDefault();
-    onSearchMovies(searchStr, isShowShortMovies);
-    localStorage.setItem('searchingValue', searchStr);
+    onSearchMovies(searchValue, isShowShortMovies);
+    localStorage.setItem('searchingValue', searchValue);
   }
 
   const onChangeCheckbox = (value) => {
@@ -34,7 +34,7 @@ const SearchForm = ({ onSearchMovies }) => {
             type="text"
             id="movie"
             placeholder="Фильм"
-            value={searchStr}
+            value={searchValue}
             onChange={(evt) => onChangeSearchInput(evt)}
             required
           />
