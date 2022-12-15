@@ -1,4 +1,5 @@
 .movie {
+  position: relative;
   display: grid;
   grid-template-columns: 8fr 1fr;
   grid-template-rows: min-content 48px auto;
@@ -9,6 +10,16 @@
   padding: 0;
   margin: 0;
   margin-bottom: 20px;
+}
+
+.movie__link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: transparent;
 }
 
 .movie__img {
@@ -47,6 +58,7 @@
   border: none;
   cursor: pointer;
   transition: opacity .6s;
+  z-index: 5;
 }
 
 .movie__save-btn:hover {
