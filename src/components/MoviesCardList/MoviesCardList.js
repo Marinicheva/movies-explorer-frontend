@@ -5,7 +5,7 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 
 const MoviesCardList = ({ moviesList, movieBtnClassName }) => {
-   const [deviceWidth, setDeviceWidth] = useState(window.screen.width);
+  const [deviceWidth, setDeviceWidth] = useState(window.screen.width);
   const [addMoviesCount, setAddMovieCount] = useState(0);
   const [visibleMovies, setVisibleMovies] = useState(null);  
 
@@ -37,10 +37,8 @@ const MoviesCardList = ({ moviesList, movieBtnClassName }) => {
 
   // Добавляем нужное кол-во карточек в зависимости от размера экрана
   const onShowMore = () => {
-    if (deviceWidth < 451) {
+    if (deviceWidth < 851) {
       setAddMovieCount(state => state + 2);
-    } else if (deviceWidth < 851) {
-      setAddMovieCount(state => state + 3);
     } else {
       setAddMovieCount(state => state + 4);
     }
