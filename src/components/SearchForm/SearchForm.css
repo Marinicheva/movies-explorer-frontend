@@ -1,0 +1,134 @@
+.search-container {
+  padding: 70px 0;
+  border-bottom: 1px solid var(--basic-grey);
+}
+
+.search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  height: 72px;
+  background-color: var(--elem-bg-grey);
+  border-radius: 9px;
+}
+
+.search__label-input {
+  position: relative;
+  flex-grow: 1;
+}
+
+.search__label-input::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: -10px;
+  width: 34px;
+  height: 34px;
+  background-image: url('../../images/search-icon.svg');
+  background-size: 15px 15px;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.search__input {
+  position: relative;
+  padding-left: 35px;
+  margin-right: 10px;
+  width: 90%;
+  height: 50px;
+  font-size: 18px;
+  line-height: 1.11;
+  color: var(--black);
+  background-color: transparent;
+  border: none;
+  transition: background-color .6s;
+  cursor: pointer;
+}
+
+.search__input:hover {
+  background-color: var(--white);
+}
+
+.search__input::placeholder {
+  font-size: 18px;
+  line-height: 1.11;
+  color: var(--text-grey);
+}
+
+.search__input:focus {
+  background-color: var(--white);
+  outline: 1px solid var(--text-grey);
+}
+
+.search__submit-btn {
+  padding: 0;
+  margin: 0;
+  margin-right: 30px;
+  width: 34px;
+  height: 34px;
+  color: var(--white);
+  background-image: url('../../images/search-btn-arrow.svg');
+  background-position: center center;
+  background-size: 5px 12px;
+  background-repeat: no-repeat;
+  background-color: var(--blue);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: opacity .6s;
+}
+
+.search__submit-btn:hover {
+  opacity: .75;
+}
+
+@media screen and (max-width: 768px) {
+  .search-container {
+    padding-top: 80px;
+    padding-bottom: 110px;
+  }
+
+  .search {
+    padding-right: 20px;
+  }
+
+  .search__submit-btn {
+    margin-right: 8px;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .search {
+    padding: 0;
+    padding-left: 5px;
+    flex-wrap: wrap;
+    row-gap: 49px;
+  }
+
+  .search__label-input {
+    padding: 8px 0;
+    flex-grow: 0;
+  }
+
+  .search__label-input::before {
+    display: none;
+  }
+
+  .search__input {
+    padding-left: 14px;
+    margin: 0;
+    height: 50px;
+    font-size: 14px;
+    line-height: 1.43;
+  }
+
+  .search__input::placeholder {
+    font-size: 14px;
+    line-height: 1.43;
+  }
+
+  .search__submit-btn {
+    margin-right: 20px;
+  }
+}

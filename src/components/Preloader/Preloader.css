@@ -1,0 +1,47 @@
+.preloader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  padding: 20px;
+}
+
+.preloader__container {
+  width: 100px;
+  height: 100px;
+  position: relative;
+}
+
+.preloader__round {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--blue);
+  border-radius: 50px;
+}
+
+.preloader__round::after,
+.preloader__round::before {
+  content: '';
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50px;
+}
+
+.preloader__round::after {
+  background-color: var(--white);
+  animation: preloader-inside-white 1s ease-in-out infinite;
+}
+
+.preloader__round::before {
+  z-index: 1;
+  background-color: var(--blue);
+  animation: preloader-inside-blue 1s ease-in-out infinite;
+}

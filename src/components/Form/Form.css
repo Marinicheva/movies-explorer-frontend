@@ -1,0 +1,141 @@
+.form-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+  width: 100%;
+  height: 380px;
+  box-sizing: border-box;
+}
+
+.form__label {
+  font-size: 10px;
+  line-height: 1.2;
+  color: var(--text-grey);
+}
+
+.form__input {
+  padding: 7px 0;
+  margin-bottom: 25px;
+  font-size: 14px;
+  line-height: 1.21;
+  font-weight: 500;
+  color: var(--black);
+  border: none;
+  border-bottom: 1px solid var(--basic-grey);
+  transition: border-bottom-color .6s;
+}
+
+.form__input:last-of-type {
+  margin-bottom: 0;
+}
+
+.form__input::placeholder {
+  font-size: 14px;
+  line-height: 1.21;
+  font-weight: 400;
+  color: var(--text-grey);
+}
+
+.form__input:focus {
+  outline: none;
+  border-bottom-color: var(--blue);
+}
+
+.form__input_with-error {
+  color: var(--warn-red);
+  border-bottom-color: var(--warn-red);
+}
+
+.form__error-text {
+  display: none;
+  margin-top: 6px;
+  font-size: 10px;
+  line-height: 1.2;
+  color: var(--warn-red);
+}
+
+.form__error-text_visible {
+  display: block;
+}
+
+.form__submit-btn {
+  margin-top: auto;
+  min-height: 45px;
+  font-size: 14px;
+  line-height: 1.21;
+  color: var(--white);
+  background-color: var(--blue);
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: opacity .6s;
+}
+
+.form__submit-btn:hover {
+  opacity: .5;
+}
+
+.form-container__bottom {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 auto;
+  margin-top: 15px;
+}
+
+.form-container__text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.21;
+  color: var(--text-grey);
+}
+
+.form-container__back {
+  font-size: 14px;
+  line-height: 1.21;
+  color: var(--blue);
+  text-decoration: none;
+  transition: opacity .6s;
+}
+
+.form-container__back:hover {
+  opacity: .5;
+}
+
+@media screen and (max-width: 400px) {
+  .form {
+    margin-top: 10px;
+    height: 465px;
+  }
+
+  .form__label {
+    font-size: 10px;
+    line-height: 1.2;
+  }
+
+  .form__input {
+    padding: 5px 0 9px;
+  }
+
+  .form__submit-btn {
+    font-size: 12px;
+    line-height: 1.25;
+  }
+
+  .form-container__text {
+    font-size: 12px;
+    line-height: 1.25;
+  }
+
+  .form-container__back {
+    font-size: 12px;
+    line-height: 1.25;
+  }
+}
