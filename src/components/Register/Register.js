@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Form from '../Form/Form';
 
 import Greeting from '../Greeting/Greeting';
@@ -6,6 +6,16 @@ import Greeting from '../Greeting/Greeting';
 import './Register.css';
 
 const Register = () => {
+  const [newUserData, setNewUserData] = useState({name: '', email: '', password: ''});
+
+  const handleChangeInputs = (evt) => {
+    const name = evt.target.name;
+    const value = evt.target.value;
+
+    setNewUserData(state => ({...state, [name]: value}));
+  }
+
+
   return (
     <section className="register">
       <Greeting title="Добро пожаловать!" />
@@ -21,12 +31,14 @@ const Register = () => {
         <input
           type="text"
           id="reg-name"
-          name="reg-name"
+          name="name"
+          value={newUserData.name}
           className="form__input"
           placeholder="Введите имя"
           minLength={2}
           maxLength={30}
           required
+          onChange={(evt) => {handleChangeInputs(evt)}}
         />
         <span className="form__error-text"></span>
 
@@ -34,10 +46,12 @@ const Register = () => {
         <input
           type="email"
           id="reg-email"
-          name="reg-email"
+          name="email"
+          value={newUserData.email}
           className="form__input"
           placeholder="Введите e-mail"
           required
+          onChange={(evt) => {handleChangeInputs(evt)}}
         />
         <span className="form__error-text"></span>
 
@@ -45,10 +59,12 @@ const Register = () => {
         <input
           type="password"
           id="reg-password"
-          name="reg-password"
+          name="password"
+          value={newUserData.password}
           className="form__input"
           placeholder="Введите пароль"
           required
+          onChange={(evt) => {handleChangeInputs(evt)}}
         />
         <span className="form__error-text"></span>
       </Form>
