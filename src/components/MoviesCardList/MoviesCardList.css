@@ -18,6 +18,7 @@
   font-weight: 500;
   background-color: transparent;
   border: 1px solid var(--basic-grey);
+  border-radius: 5px;
   cursor: pointer;
   transition: opacity .6s;
 }
