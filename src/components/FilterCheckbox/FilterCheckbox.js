@@ -9,9 +9,8 @@ const FilterCheckbox = ({ onChangeCheckbox }) => {
   const checkboxToggleClassNames = `checkbox__toggle ${isChecked ? "checkbox__toggle_on" : "checkbox__toggle_off"}`;
 
   useEffect(() => {
-    const checkboxValue = localStorage.getItem('checkboxValue');
-
-    setIsChecked(!!checkboxValue);
+    const checkboxValue = localStorage.getItem('checkboxValue') === 'true' ? true : false;
+    setIsChecked(checkboxValue);
   }, [])
 
   const handleToggleCheckbox = (evt) => {
