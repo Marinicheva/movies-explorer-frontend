@@ -44,7 +44,7 @@ const SearchForm = ({ onSearchMovies }) => {
 
   return (
     <div className="search-container">
-      <form className="search" onSubmit={(evt) => handleSubmitSearchForm(evt)} novalidate>
+      <form className="search" onSubmit={(evt) => handleSubmitSearchForm(evt)} noValidate>
         <label className="search__label-input">
           <input
             className="search__input"
