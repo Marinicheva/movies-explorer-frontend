@@ -22,7 +22,7 @@
 
 .form__input {
   padding: 7px 0;
-  margin-bottom: 25px;
+  margin-bottom: 5px;
   font-size: 14px;
   line-height: 1.21;
   font-weight: 500;
@@ -48,21 +48,18 @@
   border-bottom-color: var(--blue);
 }
 
-.form__input_with-error {
+.form__input_with-error, .form__input_with-error:focus {
+  margin-bottom: 0;
   color: var(--warn-red);
   border-bottom-color: var(--warn-red);
 }
 
 .form__error-text {
-  display: none;
-  margin-top: 6px;
+  display: block;
+  margin-bottom: 13px;
   font-size: 10px;
   line-height: 1.2;
   color: var(--warn-red);
-}
-
-.form__error-text_visible {
-  display: block;
 }
 
 .form__submit-btn {
@@ -80,6 +77,12 @@
 
 .form__submit-btn:hover {
   opacity: .5;
+}
+
+.form__submit-btn:disabled, .form__submit-btn:disabled:hover {
+  background-color: var(--basic-grey);
+  cursor: default;
+  opacity: 1;
 }
 
 .form-container__bottom {
