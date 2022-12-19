@@ -50,8 +50,6 @@ function App() {
   return MainApi
    .registration(newUserData)
    .then((data) => {
-    // TODO: Remove log after this line
-    console.log('Now we will try to authorization');
     // При успехе сразу запрос на авторизацию и чистим форму
     onAuthorizationUser({ email: data.email, password: newUserData.password });
     resetFormCallback(regFormDefaultValues);
@@ -59,13 +57,30 @@ function App() {
    .catch(err => openPopup(err.message));
  };
 
+ const onSignOut = () => {
+  return  MainApi
+   .signout()
+   .then(() => {
+    // TODO: Здесь при успехе: стейт логедИн в фолс и подумать нало ли очистить глобальный стейт
+    console.log('Try to signout');
+    navigate('/');
+   })
+ }
+
  return (
   <div className="App">
    <Routes>
     <Route exact path="/" element={<Main />} />
     <Route path="/movies" element={<Movies onOpenPopup={openPopup} />} />
     <Route path="/saved-movies" element={<SavedMovies />} />
-    <Route path="/profile" element={<Profile />} />
+    <Route
+     path="/profile"
+     element={
+      <Profile
+       onSignout={onSignOut}
+      />}
+    />
+
     <Route
      path="/signin"
      element={
@@ -73,6 +88,7 @@ function App() {
        onLogin={(data, resetFormCallback) => onAuthorizationUser(data, resetFormCallback)}
       />}
     />
+
     <Route
      path="/signup"
      element={
@@ -80,6 +96,7 @@ function App() {
        onRegistration={(data, resetFormCallback) => onRegistrationUser(data, resetFormCallback)}
       />}
     />
+
     <Route path="*" element={<NotFound />} />
    </Routes>
    <PopupError errorMessage={popupErrorText} isOpen={isOpenPopup} onClose={closePopup} />

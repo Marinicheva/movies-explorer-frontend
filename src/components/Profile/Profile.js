@@ -3,7 +3,7 @@ import Header from '../Header/Header';
 
 import './Profile.css';
 
-const Profile = () => {
+const Profile = ({ onSignout }) => {
   const [userData, setUserData] = useState({ name: 'Виталий', email: 'pochta@yandex.ru' });
 
   const handleChangeUserData = (evt) => {
@@ -43,7 +43,12 @@ const Profile = () => {
           </label>
           <button className="edit-form__submit">Редактировать</button>
         </form>
-        <button className="profile__exit">Выйти из аккаунта</button>
+        <button
+          className="profile__exit"
+          onClick={onSignout}
+        >
+          Выйти из аккаунта
+        </button>
       </section>
 
     </>

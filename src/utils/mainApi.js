@@ -64,7 +64,9 @@ class mainApi {
   }
 
   signout() {
-    
+    return this._request({
+      urlPath: 'signout',
+    });
   }
 }
 
