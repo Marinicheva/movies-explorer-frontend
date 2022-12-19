@@ -10,7 +10,10 @@ import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
 import SavedMovies from '../SavedMovies/SavedMovies';
 
+import MainApi from '../../utils/mainApi';
+
 import './App.css';
+
 function App() {
   const [isOpenPopup, setIsOpenPopup] = useState(false);
   const [popupErrorText, setPopupErrorText] = useState('');
@@ -25,6 +28,12 @@ function App() {
     setPopupErrorText('');
   }
 
+  const onRegistrationUser = async (newUserData) => {
+    return MainApi.registration(newUserData)
+      .then((res) => console.log(res)) // При успешном логине: авторизация и ресет формы
+      .catch(err => openPopup(err.message));
+  };
+
   return (
     <div className="App">
       <Routes>
@@ -33,7 +42,7 @@ function App() {
         <Route path="/saved-movies" element={<SavedMovies />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/signin" element={<Login />} />
-        <Route path="/signup" element={<Register />} />
+        <Route path="/signup" element={<Register onRegistration={(data) => onRegistrationUser(data)} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <PopupError errorMessage={popupErrorText} isOpen={isOpenPopup} onClose={closePopup} />

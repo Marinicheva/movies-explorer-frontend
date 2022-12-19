@@ -6,6 +6,31 @@ class mainApi {
     this._getData = getData;
   }
 
+  _request ({ urlPath, method = "POST", data, token, errorMessage = 'Some error' }) {
+    const headers = {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    };
+  
+    if (token) {
+      headers["Authorization"] = `Bearer ${token}`;
+    }
+  
+    const config = {
+      method,
+      headers,
+    };
+  
+    if (data) {
+      config.body = JSON.stringify(data);
+    }
+  
+    return fetch(`${this._url}${urlPath}`, config)
+      .then((res) => {
+        return this._getData(res, errorMessage)
+      });
+  };
+
   getSavedMovies() {
 
   }
@@ -18,11 +43,15 @@ class mainApi {
 
   }
 
-  register() {
-
+  registration(newUserData) {
+    return this._request({
+      urlPath: 'signup',
+      data: newUserData,
+      errorMessage: 'Ошибка регистрации'
+    });
   }
 
-  login() {
+  authorization() {
 
   }
 
