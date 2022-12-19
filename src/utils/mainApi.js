@@ -11,21 +11,21 @@ class mainApi {
       Accept: "application/json",
       "Content-Type": "application/json",
     };
-  
+
     const config = {
       method,
       headers,
       credentials: 'include',
     };
-  
+
     if (data) {
       config.body = JSON.stringify(data);
     }
-  
+
     return fetch(`${this._url}${urlPath}`, config)
-      .then((res) => {
-        return this._getData(res, errorMessage)
-      });
+     .then((res) => {
+       return this._getData(res, errorMessage)
+     });
   };
 
   getSavedMovies() {
@@ -60,7 +60,10 @@ class mainApi {
   }
 
   getUserInfo() {
-
+    return this._request({
+       method: 'GET',
+       urlPath: 'users/me',
+     });
   }
 
   signout() {

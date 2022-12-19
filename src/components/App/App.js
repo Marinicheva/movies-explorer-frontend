@@ -17,13 +17,18 @@ import { regFormDefaultValues, loginFormDefaultValues } from '../../utils/consta
 import './App.css';
 
 function App() {
+ const [loggedIn, setLoggedIn] = useState(false);
  const [isOpenPopup, setIsOpenPopup] = useState(false);
  const [popupErrorText, setPopupErrorText] = useState('');
 
  const navigate = useNavigate();
 
  useEffect(() => {
-
+  MainApi
+   .getUserInfo()
+   .then((data) => {
+    setLoggedIn(true);
+   })
  }, []);
 
  const openPopup = (errorText) => {
@@ -42,6 +47,7 @@ function App() {
    .then(() => {
     navigate('/movies');
     resetFormCallback(loginFormDefaultValues);
+    setLoggedIn(true);
    })
    .catch(err => console.log(err.message));
  }
@@ -63,6 +69,7 @@ function App() {
    .then(() => {
     // TODO: Здесь при успехе: стейт логедИн в фолс и подумать нало ли очистить глобальный стейт
     console.log('Try to signout');
+    setLoggedIn(false);
     navigate('/');
    })
  }
@@ -70,8 +77,8 @@ function App() {
  return (
   <div className="App">
    <Routes>
-    <Route exact path="/" element={<Main />} />
-    <Route path="/movies" element={<Movies onOpenPopup={openPopup} />} />
+    <Route exact path="/" element={<Main isLoggedIn={loggedIn} />} />
+    <Route path="/movies" element={<Movies isLoggedIn={loggedIn} onOpenPopup={openPopup} />} />
     <Route path="/saved-movies" element={<SavedMovies />} />
     <Route
      path="/profile"

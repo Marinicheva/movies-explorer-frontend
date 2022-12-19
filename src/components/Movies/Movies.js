@@ -10,7 +10,7 @@ import { DEFAULT_API_ERROR_TEXT } from '../../utils//constants';
 import './Movies.css';
 import Preloader from '../Preloader/Preloader';
 
-const Movies = ({ onOpenPopup }) => {
+const Movies = ({ isLoggedIn, onOpenPopup }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [movies, setMovies] = useState([]); //Здесь хранится ответ от API
   const [findedMovies, setFindedMovies] = useState(null); //Здесь храняться отсортированные фильмы
@@ -50,7 +50,7 @@ const Movies = ({ onOpenPopup }) => {
 
   return (
     <>
-      <Header isLoggedIn={true} />
+      <Header isLoggedIn={isLoggedIn} />
       <section className="movies"  >
         <SearchForm onSearchMovies={(searchStr, isShortFilms) => onSearchMovies(searchStr, isShortFilms)} />
         {isLoading
