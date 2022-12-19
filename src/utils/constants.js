@@ -7,6 +7,7 @@ const EMAIL_REGEX = /^[\w-\.]+@[\w-]+\.[a-z]{2,4}$/i;
 const NAME_REGEX = /^[a-zа-яё\- ]+$/i;
 
 const regFormDefaultValues = {name: '', email: '', password: ''};
+const loginFormDefaultValues = {email: '', password: ''};
 
 
 function getResponseData (res, errorMessage) {
@@ -25,6 +26,7 @@ export {
   EMAIL_REGEX,
   NAME_REGEX,
   regFormDefaultValues,
+  loginFormDefaultValues,
   getResponseData,
 };
 

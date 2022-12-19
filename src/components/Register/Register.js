@@ -3,7 +3,8 @@ import Form from '../Form/Form';
 import Greeting from '../Greeting/Greeting';
 
 import { useFormWithValidation } from '../../hooks/useFormWithValidation';
-import { EMAIL_REGEX, NAME_REGEX, regFormDefaultValues  } from '../../utils/constants';
+
+import { EMAIL_REGEX, NAME_REGEX } from '../../utils/constants';
 
 import './Register.css';
 
@@ -31,11 +32,7 @@ const Register = ({ onRegistration }) => {
 
   const onSubmitForm = (evt) => {
     evt.preventDefault();
-    onRegistration(regForm.values)
-    .then(() => {
-      console.log('try to reset from');
-      regForm.resetForm(regFormDefaultValues);
-  });
+    onRegistration(regForm.values, regForm.resetForm);
   }
 
   return (

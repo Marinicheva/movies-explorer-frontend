@@ -6,19 +6,16 @@ class mainApi {
     this._getData = getData;
   }
 
-  _request ({ urlPath, method = "POST", data, token, errorMessage = 'Some error' }) {
+  _request ({ urlPath, method = "POST", data, errorMessage = 'Some error' }) {
     const headers = {
       Accept: "application/json",
       "Content-Type": "application/json",
     };
   
-    if (token) {
-      headers["Authorization"] = `Bearer ${token}`;
-    }
-  
     const config = {
       method,
       headers,
+      credentials: 'include',
     };
   
     if (data) {
@@ -51,8 +48,11 @@ class mainApi {
     });
   }
 
-  authorization() {
-
+  authorization(userData) {
+    return this._request({
+      urlPath: 'signin',
+      data: userData,
+    });
   }
 
   updateUserInfo() {

@@ -4,13 +4,9 @@ import './Form.css';
 const Form = ({ formClass, submitBtnText, children, footerText, footerPath, footerLinkText, isValid, onSubmit }) => {
   const formClassNames = `form ${formClass}`;
 
-  const handleSubmitForm = (evt) => {
-    onSubmit(evt);
-  }
-
   return (
     <div className='form-container'>
-      <form className={formClassNames} onSubmit={(evt) => handleSubmitForm(evt)}>
+      <form className={formClassNames} onSubmit={(evt) => onSubmit(evt)}>
         {
           children
         }
