@@ -1,8 +1,8 @@
 import React from 'react';
 
-import './PopupError.css';
+import './PopupInfo.css';
 
-const PopupError = ({ errorMessage ,isOpen, onClose }) => {
+const PopupInfo = ({ popupText ,isOpen, onClose, popupType }) => {
 
   const popupClassNames = `popup ${isOpen ? 'popup_opened' : ''}`;
 
@@ -14,12 +14,12 @@ const PopupError = ({ errorMessage ,isOpen, onClose }) => {
   return (
     <div className={popupClassNames}>
       <div className="popup__container">
-        <h2 className="popup__title">Произошла ошибка</h2>
-        <p className="popup__text">{errorMessage}</p>
+        {popupType === 'error' && <h2 className="popup__title">Произошла ошибка</h2>}
+        <p className="popup__text">{popupText}</p>
         <button className="popup__close" onClick={handleClosePopup}></button>
       </div>
     </div>
   )
 }
 
-export default PopupError;
+export default PopupInfo;

@@ -5,7 +5,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import Footer from '../Footer/Footer';
 
 import moviesApi from '../../utils/MoviesApi';
-import { DEFAULT_API_ERROR_TEXT } from '../../utils//constants';
+import { POPUP_MESSAGES } from '../../utils/constants';
 
 import './Movies.css';
 import Preloader from '../Preloader/Preloader';
@@ -19,7 +19,7 @@ const Movies = ({ isLoggedIn, onOpenPopup }) => {
     moviesApi.getMovies()
       .then((movies) => setMovies(movies))
       .catch(err => {
-        onOpenPopup(DEFAULT_API_ERROR_TEXT);
+        onOpenPopup(POPUP_MESSAGES.defaultApi);
       })
       .finally(setIsLoading(false));
   }, [onOpenPopup]);

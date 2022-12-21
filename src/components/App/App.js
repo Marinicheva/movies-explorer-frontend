@@ -6,22 +6,24 @@ import Login from '../Login/Login';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import NotFound from '../NotFound/NotFound';
-import PopupError from '../PopupError/PopupError';
+import PopupInfo from '../PopupInfo/PopupInfo';
 import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
 import SavedMovies from '../SavedMovies/SavedMovies';
 
 import MainApi from '../../utils/mainApi';
 
-import { regFormDefaultValues, loginFormDefaultValues } from '../../utils/constants';
+import { POPUP_TYPES, POPUP_MESSAGES, regFormDefaultValues, loginFormDefaultValues } from '../../utils/constants';
 
 import './App.css';
 
 function App() {
  const [loggedIn, setLoggedIn] = useState(false);
  const [currentUser, setCurrentUser] = useState({});
+
  const [isOpenPopup, setIsOpenPopup] = useState(false);
- const [popupErrorText, setPopupErrorText] = useState('');
+ const [popupText, setPopupText] = useState('');
+ const [popupType, setPopupType] = useState('');
 
  const navigate = useNavigate();
 
@@ -36,14 +38,14 @@ function App() {
    .catch((err) => console.log(err));
  }, [setCurrentUserContext]);
 
-const openPopup = (errorText) => {
- setPopupErrorText(errorText);
+const openPopup = (popupText) => {
+ setPopupText(popupText);
  setIsOpenPopup(true);
 }
 
 const closePopup = () => {
  setIsOpenPopup(false);
- setPopupErrorText('');
+ setPopupText('');
 }
 
 const onAuthorizationUser = (userData, resetFormCallback) => {
@@ -82,7 +84,16 @@ const onEditUserData = (changedData) => {
   .then((data) => {
    setCurrentUser({name: data.name, email: data.email});
   })
-  .catch(err => console.log(err));
+  .then(() => {
+   setPopupType(POPUP_TYPES.info);
+   setPopupText(POPUP_MESSAGES.successEditProfile);
+   setIsOpenPopup(true);
+  })
+  .catch(err => {
+   setPopupType(POPUP_TYPES.error);
+   setPopupText(err.message);
+   setIsOpenPopup(true);
+  });
 }
 
 return (
@@ -120,8 +131,9 @@ return (
     <Route path="*" element={<NotFound />} />
    </Routes>
 
-   <PopupError
-    errorMessage={popupErrorText}
+   <PopupInfo
+    popupType={popupType}
+    popupText={popupText}
     isOpen={isOpenPopup}
     onClose={closePopup}
    />

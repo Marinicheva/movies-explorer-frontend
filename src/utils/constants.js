@@ -1,8 +1,15 @@
 const MOVIES_URL = 'https://api.nomoreparties.co';
 const MAIN_API_URL = 'http://localhost:3000/';
 
-const DEFAULT_API_ERROR_TEXT = 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз';
+const POPUP_TYPES = {
+  error: 'error',
+  info: 'info'
+};
 
+const POPUP_MESSAGES = {
+  defaultApi: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
+  successEditProfile: 'Данные успешно изменены',
+}
 const EMAIL_REGEX = /^[\w-\.]+@[\w-]+\.[a-z]{2,4}$/i;
 const NAME_REGEX = /^[a-zа-яё\- ]+$/i;
 
@@ -22,25 +29,11 @@ function getResponseData (res, errorMessage) {
 export { 
   MOVIES_URL,
   MAIN_API_URL,
-  DEFAULT_API_ERROR_TEXT,
+  POPUP_TYPES,
+  POPUP_MESSAGES,
   EMAIL_REGEX,
   NAME_REGEX,
   regFormDefaultValues,
   loginFormDefaultValues,
   getResponseData,
 };
-
-// `Ошибка: ${res.status}.${errorMessage}`
-
-// fetch(bla)
-//     .then(res => {
-//       if(!res.ok) {
-//         return res.text().then(text => { throw new Error(text) })
-//        }
-//       else {
-//        return res.json();
-//      }    
-//     })
-//     .catch(err => {
-//        console.log('caught it!',err);
-//     });
