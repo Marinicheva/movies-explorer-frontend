@@ -49,14 +49,14 @@
 }
 
 .form__input_with-error, .form__input_with-error:focus {
-  margin-bottom: 0;
   color: var(--warn-red);
   border-bottom-color: var(--warn-red);
 }
 
 .form__error-text {
   display: block;
-  margin-bottom: 13px;
+  margin-bottom: 10px;
+  min-height: 12px;
   font-size: 10px;
   line-height: 1.2;
   color: var(--warn-red);

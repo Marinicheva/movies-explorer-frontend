@@ -4,31 +4,10 @@ import Greeting from '../Greeting/Greeting';
 
 import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 
-import { EMAIL_REGEX, NAME_REGEX } from '../../utils/constants';
-
 import './Register.css';
 
 const Register = ({ onRegistration }) => {
   const regForm = useFormWithValidation({name: '', email: '', password: ''});
-
-  const handleChangeInputs = (evt) => {
-    const name = evt.target.name;
-    const value = evt.target.value;
-
-    let errorText;
-
-    if (name === 'name' && !NAME_REGEX.test(value)) {
-      errorText = 'Имя может содержать только латиницу, кириллицу, пробел и дефис';
-    }else if (name === 'name' && value.length < 2) {
-      errorText = 'Слишком короткое имя. Длина имени должна быть не менее 2 символов';
-    } else if (name === 'email' && !EMAIL_REGEX.test(value)) {
-      errorText = 'Некорректный формат e-mail';
-    } else if (value.length === 0) {
-      errorText = 'Данное поле обязательно для заполнения';
-    }
-
-    regForm.handleChange(evt, errorText);
-  }
 
   const onSubmitForm = (evt) => {
     evt.preventDefault();
@@ -57,12 +36,10 @@ const Register = ({ onRegistration }) => {
           className={`form__input ${regForm.errors.name ? 'form__input_with-error' : ''}`}
           placeholder="Введите имя"
           minLength={2}
-          maxLength={30}
           required
-          onChange={(evt) => handleChangeInputs(evt)}
+          onChange={(evt) => regForm.handleChange(evt)}
         />
-        {!regForm.isValid && <span className="form__error-text">{regForm.errors.name}</span> 
-      }
+        <span className="form__error-text">{regForm.errors.name}</span>
 
         <label className="form__label" htmlFor="reg-email">E-mail</label>
         <input
@@ -73,9 +50,9 @@ const Register = ({ onRegistration }) => {
           className={`form__input ${regForm.errors.email ? 'form__input_with-error' : ''}`}
           placeholder="Введите e-mail"
           required
-          onChange={(evt) => handleChangeInputs(evt)}
+          onChange={(evt) => regForm.handleChange(evt)}
         />
-        {!regForm.isValid && <span className="form__error-text">{regForm.errors.email}</span>}
+        <span className="form__error-text">{regForm.errors.email}</span>
 
         <label className="form__label" htmlFor="reg-password">Пароль</label>
         <input
@@ -86,9 +63,9 @@ const Register = ({ onRegistration }) => {
           className={`form__input ${regForm.errors.password ? 'form__input_with-error' : ''}`}
           placeholder="Введите пароль"
           required
-          onChange={(evt) => handleChangeInputs(evt)}
+          onChange={(evt) => regForm.handleChange(evt)}
         />
-        {!regForm.isValid && <span className="form__error-text">{regForm.errors.password}</span>}
+        <span className="form__error-text">{regForm.errors.password}</span>
       </Form>
     </section>
   )
