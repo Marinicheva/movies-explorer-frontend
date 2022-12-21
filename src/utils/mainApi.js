@@ -29,7 +29,10 @@ class mainApi {
   };
 
   getSavedMovies() {
-
+    return this._request({
+      method: 'GET',
+      urlPath: 'movies',
+    });
   }
 
   addMovie() {

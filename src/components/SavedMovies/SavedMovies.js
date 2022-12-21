@@ -1,16 +1,19 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Header from '../Header/Header';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
 import Footer from '../Footer/Footer';
 
 import './SavedMovies.css';
-
-import DB from '../../utils/fakeDB.json';
+import MainApi from "../../utils/mainApi";
 
 const SavedMovies = () => {
+  const [savedMovies, setSavedMovies] = useState([]);
 
-  const savedMovies = DB.filter(item => item.isSaved);
+  useEffect(() => {
+    MainApi.getSavedMovies()
+     .then(data => setSavedMovies((data)))
+  }, []);
 
   return (
     <>

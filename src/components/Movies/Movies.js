@@ -13,7 +13,7 @@ import Preloader from '../Preloader/Preloader';
 const Movies = ({ isLoggedIn, onOpenPopup }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [movies, setMovies] = useState([]); //Здесь хранится ответ от API
-  const [findedMovies, setFindedMovies] = useState(null); //Здесь храняться отсортированные фильмы
+  const [foundMovies, setFoundMovies] = useState(null); //Здесь храняться отсортированные фильмы
 
   useEffect(() => {
     moviesApi.getMovies()
@@ -26,10 +26,10 @@ const Movies = ({ isLoggedIn, onOpenPopup }) => {
 
   useEffect(() => {
     const savedSearchResult = JSON.parse(localStorage.getItem('searchResult')) || [];
-    setFindedMovies(savedSearchResult);
+    setFoundMovies(savedSearchResult);
   }, [])
 
-  // При сабмите поиска => запускаем прелоадер => фильтруем фильмы => отключаем прелоадер
+  //TODO При сабмите поиска => запускаем прелоадер => фильтруем фильмы => отключаем прелоадер
   const onSearchMovies = (searchStr, isShortFilms) => {
     setIsLoading(true);
 
@@ -43,7 +43,7 @@ const Movies = ({ isLoggedIn, onOpenPopup }) => {
       });
 
       localStorage.setItem('searchResult', JSON.stringify(searchResult));
-      setFindedMovies(searchResult);
+      setFoundMovies(searchResult);
       setIsLoading(false);
     }, 500);
   };
@@ -56,7 +56,7 @@ const Movies = ({ isLoggedIn, onOpenPopup }) => {
         {isLoading
           ? <Preloader />
           : <MoviesCardList
-            moviesList={findedMovies}
+            moviesList={foundMovies}
             movieBtnClassName="movie__save-btn"
           />}
       </section>
