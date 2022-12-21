@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 import Login from '../Login/Login';
 import Main from '../Main/Main';
@@ -18,6 +19,7 @@ import './App.css';
 
 function App() {
  const [loggedIn, setLoggedIn] = useState(false);
+ const [currentUser, setCurrentUser] = useState({});
  const [isOpenPopup, setIsOpenPopup] = useState(false);
  const [popupErrorText, setPopupErrorText] = useState('');
 
@@ -27,54 +29,55 @@ function App() {
   MainApi
    .getUserInfo()
    .then((data) => {
-    setLoggedIn(true);
+    setCurrentUser({name: data.name, email: data.email})
    })
+   .catch((err) => console.log(err));
  }, []);
 
- const openPopup = (errorText) => {
-  setPopupErrorText(errorText);
-  setIsOpenPopup(true);
- }
+const openPopup = (errorText) => {
+ setPopupErrorText(errorText);
+ setIsOpenPopup(true);
+}
 
- const closePopup = () => {
-  setIsOpenPopup(false);
-  setPopupErrorText('');
- }
+const closePopup = () => {
+ setIsOpenPopup(false);
+ setPopupErrorText('');
+}
 
- // TODO: При успешной авторизации записать данные юзера в глобальный контекст
- const onAuthorizationUser = (data, resetFormCallback) => {
-  MainApi.authorization(data)
-   .then(() => {
-    navigate('/movies');
-    resetFormCallback(loginFormDefaultValues);
-    setLoggedIn(true);
-   })
-   .catch(err => console.log(err.message));
- }
+const onAuthorizationUser = (userData, resetFormCallback) => {
+ MainApi.authorization(userData)
+  .then((data) => {
+   setLoggedIn(true);
+   navigate('/movies');
+   resetFormCallback(loginFormDefaultValues);
+  })
+  .catch(err => console.log(err.message));
+}
 
- const onRegistrationUser = (newUserData, resetFormCallback) => {
-  return MainApi
-   .registration(newUserData)
-   .then((data) => {
-    // При успехе сразу запрос на авторизацию и чистим форму
-    onAuthorizationUser({ email: data.email, password: newUserData.password });
-    resetFormCallback(regFormDefaultValues);
-   })
-   .catch(err => openPopup(err.message));
- };
+const onRegistrationUser = (newUserData, resetFormCallback) => {
+ return MainApi
+  .registration(newUserData)
+  .then((data) => {
+   // При успехе сразу запрос на авторизацию и чистим форму
+   onAuthorizationUser({ email: data.email, password: newUserData.password });
+   resetFormCallback(regFormDefaultValues);
+  })
+  .catch(err => openPopup(err.message));
+};
 
- const onSignOut = () => {
-  return  MainApi
-   .signout()
-   .then(() => {
-    // TODO: Здесь при успехе: стейт логедИн в фолс и подумать нало ли очистить глобальный стейт
-    console.log('Try to signout');
-    setLoggedIn(false);
-    navigate('/');
-   })
- }
+const onSignOut = () => {
+ return  MainApi
+  .signout()
+  .then(() => {
+   // TODO: Здесь при успехе: стейт логедИн в фолс и подумать нало ли очистить глобальный стейт
+   console.log('Try to signout');
+   setLoggedIn(false);
+   navigate('/');
+  })
+}
 
- return (
+return (
+ <CurrentUserContext.Provider value={currentUser}>
   <div className="App">
    <Routes>
     <Route exact path="/" element={<Main isLoggedIn={loggedIn} />} />
@@ -106,9 +109,15 @@ function App() {
 
     <Route path="*" element={<NotFound />} />
    </Routes>
-   <PopupError errorMessage={popupErrorText} isOpen={isOpenPopup} onClose={closePopup} />
+
+   <PopupError
+    errorMessage={popupErrorText}
+    isOpen={isOpenPopup}
+    onClose={closePopup}
+   />
   </div>
- );
+ </CurrentUserContext.Provider>
+);
 }
 
 export default App;
