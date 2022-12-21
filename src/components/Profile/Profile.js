@@ -7,27 +7,29 @@ import {useFormWithValidation} from "../../hooks/useFormWithValidation";
 import './Profile.css';
 const Profile = ({ onEditUserData, onSignout }) => {
   const currentUser = useContext(CurrentUserContext);
-/*
-  const [userData, setUserData] = useState(currentUser);
-*/
 
   const editUserDataForm = useFormWithValidation({name: '', email: ''});
 
   useEffect(() => {
     if (currentUser.name && currentUser.email) {
       editUserDataForm.setValues(currentUser);
-      editUserDataForm.setIsValid(true);
     }
   }, [currentUser]);
 
-  const handleSubmitChangeUserData = (evt) => {
-    evt.preventDefault();
-    if (currentUser.name === editUserDataForm.values.name && currentUser.email === editUserDataForm.values.email) {
-      return;
+  const handleChangeInputs = (evt) => {
+    editUserDataForm.handleChange(evt);
+
+    const isSameValue = evt.target.value === currentUser[evt.target.name];
+
+    if ( isSameValue ) {
+      editUserDataForm.setIsValid(false);
     }
-    onEditUserData(editUserDataForm.values);
   }
 
+  const handleSubmitChangeUserData = (evt) => {
+    evt.preventDefault();
+    onEditUserData(editUserDataForm.values);
+  }
 
   return (
     <>
@@ -50,7 +52,7 @@ const Profile = ({ onEditUserData, onSignout }) => {
               minLength={2}
               maxLength={30}
               required={true}
-              onChange={(evt) => editUserDataForm.handleChange(evt)}
+              onChange={(evt) => handleChangeInputs(evt)}
             />
           </label>
           <span className="edit-form__error-text">{editUserDataForm.errors.name}</span>
@@ -64,7 +66,7 @@ const Profile = ({ onEditUserData, onSignout }) => {
               value={editUserDataForm.values.email}
               className={`edit-form__input ${editUserDataForm.errors.email && 'edit-form__input_with_error'}`}
               required={true}
-              onChange={(evt) => editUserDataForm.handleChange(evt)}
+              onChange={(evt) => handleChangeInputs(evt)}
             />
           </label>
           <span className="edit-form__error-text">{editUserDataForm.errors.email}</span>
