@@ -29,8 +29,9 @@ function App() {
   MainApi
    .getUserInfo()
    .then((data) => {
-    setCurrentUser({name: data.name, email: data.email})
+    setCurrentUser({name: data.name, email: data.email});
    })
+   .then(() => setLoggedIn(true))
    .catch((err) => console.log(err));
  }, []);
 

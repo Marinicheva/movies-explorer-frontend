@@ -23,7 +23,6 @@ export function useFormWithValidation(initialValues) {
       setErrors(state => ({...state, [name]: 'Некорректный формат e-mail'}))
     } else {
       setErrors({...errors, [name]: target.validationMessage });
-      setIsValid(false);
     }
 
     setIsValid(target.closest("form").checkValidity() && !errors[name]);
