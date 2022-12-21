@@ -5,7 +5,7 @@ import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import {useFormWithValidation} from "../../hooks/useFormWithValidation";
 
 import './Profile.css';
-const Profile = ({ onChangeUser, onSignout }) => {
+const Profile = ({ onEditUserData, onSignout }) => {
   const currentUser = useContext(CurrentUserContext);
 /*
   const [userData, setUserData] = useState(currentUser);
@@ -20,17 +20,12 @@ const Profile = ({ onChangeUser, onSignout }) => {
     }
   }, [currentUser]);
 
-  const onBlurInput = (evt) => {
-    const name = evt.target.name;
-
-    editUserDataForm.setValues(state => ({...state, [name]: currentUser[name]}));
-    editUserDataForm.setErrors({});
-    editUserDataForm.setIsValid(true);
-  }
-
   const handleSubmitChangeUserData = (evt) => {
     evt.preventDefault();
-    console.log('submit');
+    if (currentUser.name === editUserDataForm.values.name && currentUser.email === editUserDataForm.values.email) {
+      return;
+    }
+    onEditUserData(editUserDataForm.values);
   }
 
 
@@ -56,7 +51,6 @@ const Profile = ({ onChangeUser, onSignout }) => {
               maxLength={30}
               required={true}
               onChange={(evt) => editUserDataForm.handleChange(evt)}
-              onBlur={(evt) => onBlurInput(evt)}
             />
           </label>
           <span className="edit-form__error-text">{editUserDataForm.errors.name}</span>
@@ -71,7 +65,6 @@ const Profile = ({ onChangeUser, onSignout }) => {
               className={`edit-form__input ${editUserDataForm.errors.email && 'edit-form__input_with_error'}`}
               required={true}
               onChange={(evt) => editUserDataForm.handleChange(evt)}
-              onBlur={(evt) => onBlurInput(evt)}
             />
           </label>
           <span className="edit-form__error-text">{editUserDataForm.errors.email}</span>

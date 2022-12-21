@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
@@ -25,15 +25,16 @@ function App() {
 
  const navigate = useNavigate();
 
+ const setCurrentUserContext = useCallback(() => {
+  return MainApi.getUserInfo()
+   .then((data) => setCurrentUser({name: data.name, email: data.email}));
+ }, []);
+
  useEffect(() => {
-  MainApi
-   .getUserInfo()
-   .then((data) => {
-    setCurrentUser({name: data.name, email: data.email});
-   })
+  setCurrentUserContext()
    .then(() => setLoggedIn(true))
    .catch((err) => console.log(err));
- }, []);
+ }, [setCurrentUserContext]);
 
 const openPopup = (errorText) => {
  setPopupErrorText(errorText);
@@ -47,7 +48,8 @@ const closePopup = () => {
 
 const onAuthorizationUser = (userData, resetFormCallback) => {
  MainApi.authorization(userData)
-  .then((data) => {
+  .then(() => setCurrentUserContext())
+  .then(() => {
    setLoggedIn(true);
    navigate('/movies');
    resetFormCallback(loginFormDefaultValues);
@@ -59,7 +61,6 @@ const onRegistrationUser = (newUserData, resetFormCallback) => {
  return MainApi
   .registration(newUserData)
   .then((data) => {
-   // При успехе сразу запрос на авторизацию и чистим форму
    onAuthorizationUser({ email: data.email, password: newUserData.password });
    resetFormCallback(regFormDefaultValues);
   })
@@ -75,6 +76,13 @@ const onSignOut = () => {
    setLoggedIn(false);
    navigate('/');
   })
+};
+const onEditUserData = (changedData) => {
+ MainApi.updateUserInfo(changedData)
+  .then((data) => {
+   setCurrentUser({name: data.name, email: data.email});
+  })
+  .catch(err => console.log(err));
 }
 
 return (
@@ -88,6 +96,7 @@ return (
      path="/profile"
      element={
       <Profile
+       onEditUserData={(data) => onEditUserData(data)}
        onSignout={onSignOut}
       />}
     />

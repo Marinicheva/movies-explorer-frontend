@@ -55,8 +55,12 @@ class mainApi {
     });
   }
 
-  updateUserInfo() {
-
+  updateUserInfo(changedData) {
+    return this._request({
+      method: 'PATCH',
+      urlPath: 'users/me',
+      data: changedData,
+    });
   }
 
   getUserInfo() {

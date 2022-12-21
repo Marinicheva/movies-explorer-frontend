@@ -17,15 +17,19 @@ export function useFormWithValidation(initialValues) {
       setErrors(state => ({...state, [name]: 'Данное поле обязательно для заполнения'}))
     } else if (name === 'name' && !NAME_REGEX.test(value)) {
       setErrors(state => ({...state, [name]: 'Имя может содержать только латиницу, кириллицу, пробел и дефис'}))
+      setIsValid(false);
+      return;
     } else if (name === 'name' && (value.length < 2 || value.length > 30)) {
       setErrors(state => ({...state, [name]: 'Имя должно быть длиной не менее 2 символов и не более 30'}))
     } else if (name === 'email' && !EMAIL_REGEX.test(value)) {
-      setErrors(state => ({...state, [name]: 'Некорректный формат e-mail'}))
+      setErrors(state => ({...state, [name]: 'Некорректный формат e-mail'}));
+      setIsValid(false);
+      return;
     } else {
       setErrors({...errors, [name]: target.validationMessage });
     }
 
-    setIsValid(target.closest("form").checkValidity() && !errors[name]);
+    setIsValid(target.closest("form").checkValidity());
   };
 
   const resetForm = useCallback(
