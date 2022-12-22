@@ -4,7 +4,7 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 
 import './MoviesCardList.css';
 
-const MoviesCardList = ({ moviesList, movieBtnClassName }) => {
+const MoviesCardList = ({ moviesList, movieBtnClassName, onSaveMovie }) => {
   const [deviceWidth, setDeviceWidth] = useState(window.screen.width);
   const [addMoviesCount, setAddMovieCount] = useState(0);
   const [visibleMovies, setVisibleMovies] = useState(null);  
@@ -49,12 +49,19 @@ const MoviesCardList = ({ moviesList, movieBtnClassName }) => {
     return <h2 className="movies__empty-list">Ничего не найдено</h2>
   }
 
+  console.log(moviesList);
+
   return (
     <>
       <ul className="movies-list">
         { visibleMovies &&
           visibleMovies.map((item) => {
-            return <MoviesCard key={item.id} movieData={item} btnClassName={movieBtnClassName} />
+            return <MoviesCard
+             key={item.id || item._id}
+             movieData={item}
+             btnClassName={movieBtnClassName}
+             onSaveMovie={onSaveMovie}
+            />
           })
         }
       </ul>

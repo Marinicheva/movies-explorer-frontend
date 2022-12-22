@@ -35,8 +35,11 @@ class mainApi {
     });
   }
 
-  addMovie() {
-
+  addMovie(movieData) {
+    return this._request({
+      urlPath: 'movies',
+      data: movieData,
+    });
   }
 
   deleteMovie() {

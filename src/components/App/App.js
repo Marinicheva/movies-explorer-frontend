@@ -16,6 +16,7 @@ import MainApi from '../../utils/mainApi';
 import { POPUP_TYPES, POPUP_MESSAGES, regFormDefaultValues, loginFormDefaultValues } from '../../utils/constants';
 
 import './App.css';
+import mainApi from "../../utils/mainApi";
 
 function App() {
  const [loggedIn, setLoggedIn] = useState(false);
@@ -96,12 +97,26 @@ const onEditUserData = (changedData) => {
   });
 }
 
+const onSaveMovie = (movieData) => {
+ mainApi.addMovie(movieData)
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
+}
+
 return (
  <CurrentUserContext.Provider value={currentUser}>
   <div className="App">
    <Routes>
     <Route exact path="/" element={<Main isLoggedIn={loggedIn} />} />
-    <Route path="/movies" element={<Movies isLoggedIn={loggedIn} onOpenPopup={openPopup} />} />
+    <Route
+      path="/movies"
+      element={
+       <Movies
+        isLoggedIn={loggedIn}
+        onOpenPopup={openPopup}
+        onSaveMovie={(data) => onSaveMovie(data)}
+       />}
+    />
     <Route path="/saved-movies" element={<SavedMovies />} />
     <Route
      path="/profile"

@@ -10,18 +10,21 @@ import { POPUP_MESSAGES } from '../../utils/constants';
 import './Movies.css';
 import Preloader from '../Preloader/Preloader';
 
-const Movies = ({ isLoggedIn, onOpenPopup }) => {
+const Movies = ({ isLoggedIn, onOpenPopup, onSaveMovie }) => {
   const [isLoading, setIsLoading] = useState(true);
+
   const [movies, setMovies] = useState([]); //Здесь хранится ответ от API
   const [foundMovies, setFoundMovies] = useState(null); //Здесь храняться отсортированные фильмы
 
   useEffect(() => {
+    setIsLoading(true);
+
     moviesApi.getMovies()
       .then((movies) => setMovies(movies))
       .catch(err => {
         onOpenPopup(POPUP_MESSAGES.defaultApi);
       })
-      .finally(setIsLoading(false));
+      .finally(() => setIsLoading(false));
   }, [onOpenPopup]);
 
   useEffect(() => {
@@ -52,12 +55,15 @@ const Movies = ({ isLoggedIn, onOpenPopup }) => {
     <>
       <Header isLoggedIn={isLoggedIn} />
       <section className="movies"  >
-        <SearchForm onSearchMovies={(searchStr, isShortFilms) => onSearchMovies(searchStr, isShortFilms)} />
+        <SearchForm
+          onSearchMovies={(searchStr, isShortFilms) => onSearchMovies(searchStr, isShortFilms)}
+        />
         {isLoading
           ? <Preloader />
           : <MoviesCardList
             moviesList={foundMovies}
             movieBtnClassName="movie__save-btn"
+            onSaveMovie={(data) => onSaveMovie(data)}
           />}
       </section>
       <Footer />
