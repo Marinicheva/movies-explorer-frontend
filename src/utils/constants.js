@@ -27,6 +27,13 @@ function getResponseData (res, errorMessage) {
   return res.json();
 }
 
+function searchingMovies (searchValue, arr) {
+  return arr.filter(item => item.nameRU.toLowerCase().includes(searchValue.toLowerCase()));
+}
+
+function filterShortMovies (arr) {
+  return arr.filter(item => item.duration <= 40);
+}
 
 export { 
   MOVIES_URL,
@@ -39,4 +46,6 @@ export {
   loginFormDefaultValues,
   DEFAULT_MOVIE_DATA,
   getResponseData,
+  searchingMovies,
+  filterShortMovies,
 };
