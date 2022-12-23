@@ -1,29 +1,41 @@
 import React, {useEffect, useState} from 'react';
 import Header from '../Header/Header';
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import Preloader from "../Preloader/Preloader";
 import Footer from '../Footer/Footer';
 
 import './SavedMovies.css';
-import MainApi from "../../utils/mainApi";
 
-const SavedMovies = () => {
-  const [savedMovies, setSavedMovies] = useState([]);
+
+const SavedMovies = ({ isLoading, movies, isLoggedIn, onMountComponent, onClickMovieBtn }) => {
 
   useEffect(() => {
-    MainApi.getSavedMovies()
-     .then(data => setSavedMovies((data)))
+    onMountComponent();
   }, []);
 
+  const onClickCardBtn = (movieData) => {
+   onClickMovieBtn(movieData._id);
+ }
+
   return (
-    <>
-    <Header isLoggedIn={true} />
-      <section className="saved-movies">
-        <SearchForm />
-        <MoviesCardList moviesList={savedMovies} movieBtnClassName="movie__delete-btn" />
-      </section>
-      <Footer />
-    </>
+   <>
+     <Header isLoggedIn={isLoggedIn} />
+     <section className="saved-movies">
+       <SearchForm />
+       {
+         isLoading
+          ? <Preloader />
+          : <MoviesCardList
+           moviesList={movies}
+           movieBtnClassName="movie__delete-btn"
+           onClickMovieBtn={(data) => onClickCardBtn(data)}
+          />
+       }
+
+     </section>
+     <Footer />
+   </>
   )
 }
 

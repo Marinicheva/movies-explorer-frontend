@@ -59,6 +59,12 @@ const Movies = ({ isLoading, movies, isLoggedIn, onFirstSearch, onSaveMovie }) =
   }
  }
 
+ // Что будем делать при клике на кнопку карточки
+ const onClickCardBtn = (movieData) => {
+  // Вытащить нужные данные и в зависимости от того сохранен фильм или нет запрос к API на добавление или удаление
+  console.log(movieData);
+ }
+
  return (
   <>
    <Header isLoggedIn={isLoggedIn} />
@@ -71,7 +77,7 @@ const Movies = ({ isLoading, movies, isLoggedIn, onFirstSearch, onSaveMovie }) =
      : <MoviesCardList
       moviesList={renderedMovies}
       movieBtnClassName="movie__save-btn"
-      onSaveMovie={(data) => onSaveMovie(data)}
+      onClickMovieBtn={(data) => onClickCardBtn(data)}
      />}
    </section>
    <Footer />

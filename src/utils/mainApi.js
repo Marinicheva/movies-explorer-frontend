@@ -42,8 +42,11 @@ class mainApi {
     });
   }
 
-  deleteMovie() {
-
+  deleteMovie(movieId) {
+    return this._request({
+      method: 'DELETE',
+      urlPath: `movies/${movieId}`
+    })
   }
 
   registration(newUserData) {

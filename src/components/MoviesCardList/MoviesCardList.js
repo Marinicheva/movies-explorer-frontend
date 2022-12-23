@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
 import './MoviesCardList.css';
+import {MOVIES_URL} from "../../utils/constants";
 
-const MoviesCardList = ({ moviesList, movieBtnClassName, onSaveMovie }) => {
+const MoviesCardList = ({ moviesList, movieBtnClassName, onClickMovieBtn }) => {
   const [deviceWidth, setDeviceWidth] = useState(window.screen.width);
   const [addMoviesCount, setAddMovieCount] = useState(0);
   const [visibleMovies, setVisibleMovies] = useState(null);  
@@ -44,7 +45,7 @@ const MoviesCardList = ({ moviesList, movieBtnClassName, onSaveMovie }) => {
     }
   }
 
-
+  // Если нет сохраненных или ничего не найдено
   if (!moviesList || moviesList.length < 1) {
     return <h2 className="movies__empty-list">Ничего не найдено</h2>
   }
@@ -53,17 +54,18 @@ const MoviesCardList = ({ moviesList, movieBtnClassName, onSaveMovie }) => {
     <>
       <ul className="movies-list">
         { visibleMovies &&
-          visibleMovies.map((item) => {
+          visibleMovies.map((movie) => {
             return <MoviesCard
-             key={item.id || item._id}
-             movieData={item}
+             key={movie.id || movie._id}
+             movie={movie}
              btnClassName={movieBtnClassName}
-             onSaveMovie={onSaveMovie}
+             onClickMovieBtn={(data) => onClickMovieBtn(data)}
             />
           })
         }
       </ul>
-      { moviesList.length > 15 && <button className="movies__more-btn" onClick={onShowMore}>Ещё</button> }
+      { moviesList.length > 15
+       && <button className="movies__more-btn" onClick={onShowMore}>Ещё</button> }
     </>
   )
 }

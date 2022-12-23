@@ -24,7 +24,9 @@ function App() {
  const [currentUser, setCurrentUser] = useState({});
 
  const [isLoading, setIsLoading] = useState(false);
+ const [savedMovies, setSavedMovies] = useState([]);
  const [allMovies, setAllMovies] = useState([]);
+
 
  const [isOpenPopup, setIsOpenPopup] = useState(false);
  const [popupText, setPopupText] = useState('');
@@ -120,6 +122,21 @@ const onSaveMovie = (movieData) => {
   .catch(err => console.log(err));
 }
 
+const onDeleteMovie = (movieID) => {
+ mainApi.deleteMovie(movieID)
+  .then(() => {
+   return getSavedMovies();
+  })
+  .catch(err => console.log(err));
+ };
+
+const getSavedMovies = () => {
+ mainApi.getSavedMovies()
+  .then((movies) => {
+   setSavedMovies(movies);
+  });
+}
+
 return (
  <CurrentUserContext.Provider value={currentUser}>
   <div className="App">
@@ -136,7 +153,17 @@ return (
         onSaveMovie={(data) => onSaveMovie(data)}
        />}
     />
-    <Route path="/saved-movies" element={<SavedMovies />} />
+    <Route
+     path="/saved-movies"
+     element={
+      <SavedMovies
+       isLoading={isLoading}
+       movies={savedMovies}
+       isLoggedIn={loggedIn}
+       onMountComponent={getSavedMovies}
+       onClickMovieBtn={(id) => onDeleteMovie(id)}
+      />}
+    />
     <Route
      path="/profile"
      element={
