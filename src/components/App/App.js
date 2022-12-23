@@ -17,10 +17,14 @@ import { POPUP_TYPES, POPUP_MESSAGES, regFormDefaultValues, loginFormDefaultValu
 
 import './App.css';
 import mainApi from "../../utils/mainApi";
+import moviesApi from "../../utils/MoviesApi";
 
 function App() {
  const [loggedIn, setLoggedIn] = useState(false);
  const [currentUser, setCurrentUser] = useState({});
+
+ const [isLoading, setIsLoading] = useState(false);
+ const [allMovies, setAllMovies] = useState([]);
 
  const [isOpenPopup, setIsOpenPopup] = useState(false);
  const [popupText, setPopupText] = useState('');
@@ -97,9 +101,22 @@ const onEditUserData = (changedData) => {
   });
 }
 
+const onGetAllMovies = () => {
+ setIsLoading(true);
+ return moviesApi.getMovies()
+  .then((movies) => {
+   setAllMovies(movies);
+   setIsLoading(false);
+  })
+  .catch((err) => {
+   // TODO: Open Popup with error
+   console.log(err);
+  })
+}
+
 const onSaveMovie = (movieData) => {
  mainApi.addMovie(movieData)
-  .then(data => console.log(data))
+  .then(data => setAllMovies(data))
   .catch(err => console.log(err));
 }
 
@@ -112,8 +129,10 @@ return (
       path="/movies"
       element={
        <Movies
+        isLoading={isLoading}
+        movies={allMovies}
         isLoggedIn={loggedIn}
-        onOpenPopup={openPopup}
+        onFirstSearch={onGetAllMovies}
         onSaveMovie={(data) => onSaveMovie(data)}
        />}
     />

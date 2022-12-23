@@ -49,8 +49,6 @@ const MoviesCardList = ({ moviesList, movieBtnClassName, onSaveMovie }) => {
     return <h2 className="movies__empty-list">Ничего не найдено</h2>
   }
 
-  console.log(moviesList);
-
   return (
     <>
       <ul className="movies-list">

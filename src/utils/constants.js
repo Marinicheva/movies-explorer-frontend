@@ -35,6 +35,16 @@ function filterShortMovies (arr) {
   return arr.filter(item => item.duration <= 40);
 }
 
+function sortedMovies (searchValue, isFilter, arr) {
+  let sortedMovies = searchingMovies(searchValue, arr);
+
+  if (isFilter) {
+    sortedMovies = filterShortMovies(sortedMovies);
+  }
+
+  return sortedMovies;
+}
+
 export { 
   MOVIES_URL,
   MAIN_API_URL,
@@ -46,6 +56,5 @@ export {
   loginFormDefaultValues,
   DEFAULT_MOVIE_DATA,
   getResponseData,
-  searchingMovies,
-  filterShortMovies,
+  sortedMovies
 };

@@ -2,73 +2,81 @@ import React, { useEffect, useState } from 'react';
 import Header from '../Header/Header';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
+import Preloader from '../Preloader/Preloader';
 import Footer from '../Footer/Footer';
 
-import moviesApi from '../../utils/MoviesApi';
-import { POPUP_MESSAGES } from '../../utils/constants';
+import {sortedMovies} from "../../utils/constants";
 
 import './Movies.css';
-import Preloader from '../Preloader/Preloader';
 
-const Movies = ({ isLoggedIn, onOpenPopup, onSaveMovie }) => {
-  const [isLoading, setIsLoading] = useState(true);
+const Movies = ({ isLoading, movies, isLoggedIn, onFirstSearch, onSaveMovie }) => {
 
-  const [movies, setMovies] = useState([]); //Здесь хранится ответ от API
-  const [foundMovies, setFoundMovies] = useState(null); //Здесь храняться отсортированные фильмы
+ // const [isLoading, setIsLoading] = useState(false);
+ //Здесь храняться отсортированные фильмы
+ const [renderedMovies, setRenderedMovies] = useState(null);
 
-  useEffect(() => {
-    setIsLoading(true);
+// TODO: Нет прелоадера !!!!
 
-    moviesApi.getMovies()
-      .then((movies) => setMovies(movies))
-      .catch(err => {
-        onOpenPopup(POPUP_MESSAGES.defaultApi);
-      })
-      .finally(() => setIsLoading(false));
-  }, [onOpenPopup]);
+ // При монтировании компонента проверяем наличие в локалсторэдже найденных фильмов
+ useEffect(() => {
+  /*
+  1. Определяем наличие сохраненного результата поиска: есть - ставим его в стейт фильмов
+  2. Определяем наличие сохраненного запроса поиска: есть - фильтруем ставит в рендерируемые и сохраняем в сторэдже
+  3. Ничего вышеперечисленного нет - ничего не делаем
+  */
+  const savedSearchResult = JSON.parse(localStorage.getItem('searchResult'));
+  const savedSearchingStr = localStorage.getItem('searchingValue');
+  const checkboxValue = localStorage.getItem('checkboxValue');
 
-  useEffect(() => {
-    const savedSearchResult = JSON.parse(localStorage.getItem('searchResult')) || [];
-    setFoundMovies(savedSearchResult);
-  }, [])
+  if (savedSearchResult) {
+   setRenderedMovies(savedSearchResult);
+   return;
+  }
 
-  //TODO При сабмите поиска => запускаем прелоадер => фильтруем фильмы => отключаем прелоадер
-  const onSearchMovies = (searchStr, isShortFilms) => {
-    setIsLoading(true);
+   if (savedSearchingStr) {
+    const foundMovies = sortedMovies(savedSearchingStr, checkboxValue, movies);
 
-    // TODO: Оставлять ли таймаут ???
-    setTimeout(() => {
-      const searchResult = movies.filter((item) => {
-        return (
-          (isShortFilms ? item.duration <= 40 : true)
-          && item.nameRU.toLowerCase().includes(searchStr.toLowerCase())
-        )
-      });
+    setRenderedMovies(foundMovies);
+    localStorage.setItem('searchResult', JSON.stringify(foundMovies));
+    return;
+   }
 
-      localStorage.setItem('searchResult', JSON.stringify(searchResult));
-      setFoundMovies(searchResult);
-      setIsLoading(false);
-    }, 500);
-  };
+ }, [movies]);
+ 
+ const onSubmitSearch = (searchStr, isShortFilms) => {
 
-  return (
-    <>
-      <Header isLoggedIn={isLoggedIn} />
-      <section className="movies"  >
-        <SearchForm
-          onSearchMovies={(searchStr, isShortFilms) => onSearchMovies(searchStr, isShortFilms)}
-        />
-        {isLoading
-          ? <Preloader />
-          : <MoviesCardList
-            moviesList={foundMovies}
-            movieBtnClassName="movie__save-btn"
-            onSaveMovie={(data) => onSaveMovie(data)}
-          />}
-      </section>
-      <Footer />
-    </>
-  )
+  if (!movies.length) {
+   onFirstSearch();
+
+   localStorage.setItem('searchingValue', searchStr);
+   localStorage.setItem('checkboxValue', isShortFilms);
+  } else {
+   const foundMovies = sortedMovies(searchStr, isShortFilms, movies);
+
+   localStorage.setItem('searchResult', JSON.stringify(foundMovies));
+
+   setRenderedMovies(foundMovies);
+  }
+ }
+
+ return (
+  <>
+   <Header isLoggedIn={isLoggedIn} />
+   <section className="movies"  >
+    <SearchForm
+     onSearchMovies={(searchStr, isShortFilms) => onSubmitSearch(searchStr, isShortFilms)}
+    />
+    {isLoading
+     ? <Preloader />
+     : <MoviesCardList
+      moviesList={renderedMovies}
+      movieBtnClassName="movie__save-btn"
+      onSaveMovie={(data) => onSaveMovie(data)}
+     />}
+   </section>
+   <Footer />
+  </>
+ )
 }
 
 export default Movies;
