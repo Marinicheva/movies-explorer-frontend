@@ -11,6 +11,10 @@ const MoviesCard = ({ movie, btnClassName, onClickMovieBtn }) => {
  const savedClassName = movie.isSaved ? ' movie__save-btn_active' : '';
  const movieBtnClassNames = btnClassName !== 'movie__save-btn' ? btnClassName : (btnClassName + savedClassName);
 
+ const handleClick = () => {
+  onClickMovieBtn(movie);
+ }
+
  return (
   <li className="movies__item movie">
    <a
@@ -29,7 +33,7 @@ const MoviesCard = ({ movie, btnClassName, onClickMovieBtn }) => {
    <h3 className="movie__title">{movie.nameRU}</h3>
    <button
      className={movieBtnClassNames}
-     onClick={() => onClickMovieBtn(movie)}></button>
+     onClick={() => handleClick()}></button>
    <div className="movie__bottom">
     <p className="movie__duration">
      {`${durationHours}ч ${durationMinutes > 9 ? durationMinutes : '0' + durationMinutes}`}

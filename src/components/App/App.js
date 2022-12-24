@@ -13,7 +13,7 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 
 import MainApi from '../../utils/mainApi';
 
-import { POPUP_TYPES, POPUP_MESSAGES, regFormDefaultValues, loginFormDefaultValues } from '../../utils/constants';
+import { POPUP_TYPES, POPUP_MESSAGES, regFormDefaultValues, loginFormDefaultValues, checkIsMovieSaved } from '../../utils/constants';
 
 import './App.css';
 import mainApi from "../../utils/mainApi";
@@ -34,27 +34,33 @@ function App() {
 
  const navigate = useNavigate();
 
+ //
  const setCurrentUserContext = useCallback(() => {
   return MainApi.getUserInfo()
    .then((data) => setCurrentUser({name: data.name, email: data.email}));
  }, []);
 
+ // При монтировании компонента делаем запрос на получение данных юзера
+ // т.о. проверяем хранят ли куки токен
  useEffect(() => {
   setCurrentUserContext()
    .then(() => setLoggedIn(true))
    .catch((err) => console.log(err));
  }, [setCurrentUserContext]);
 
+ /* Открытие попапа*/
 const openPopup = (popupText) => {
  setPopupText(popupText);
  setIsOpenPopup(true);
 }
 
+ /* Закрытие попапа*/
 const closePopup = () => {
  setIsOpenPopup(false);
  setPopupText('');
 }
 
+/* Запрос по сабмиту кнопки авторизации*/
 const onAuthorizationUser = (userData, resetFormCallback) => {
  MainApi.authorization(userData)
   .then(() => setCurrentUserContext())
@@ -66,6 +72,7 @@ const onAuthorizationUser = (userData, resetFormCallback) => {
   .catch(err => console.log(err.message));
 }
 
+/* Запрос по сабмиту регистрации*/
 const onRegistrationUser = (newUserData, resetFormCallback) => {
  return MainApi
   .registration(newUserData)
@@ -76,6 +83,7 @@ const onRegistrationUser = (newUserData, resetFormCallback) => {
   .catch(err => openPopup(err.message));
 };
 
+/* Запрос на разлогин*/
 const onSignOut = () => {
  return  MainApi
   .signout()
@@ -86,6 +94,8 @@ const onSignOut = () => {
    navigate('/');
   })
 };
+
+/* Запрос на редактирование данных юзера*/
 const onEditUserData = (changedData) => {
  MainApi.updateUserInfo(changedData)
   .then((data) => {
@@ -103,6 +113,7 @@ const onEditUserData = (changedData) => {
   });
 }
 
+/* Запрос на получение фильмов с BeatFilms*/
 const onGetAllMovies = () => {
  setIsLoading(true);
  return moviesApi.getMovies()
@@ -116,12 +127,16 @@ const onGetAllMovies = () => {
   })
 }
 
+/* Запрос на добавление фильма в сохраненные*/
 const onSaveMovie = (movieData) => {
  mainApi.addMovie(movieData)
-  .then(data => setAllMovies(data))
+  .then(data => {
+   setSavedMovies(state => ([...state, data]));
+  })
   .catch(err => console.log(err));
 }
 
+/* Запрос на удаление фильма из сохраненных*/
 const onDeleteMovie = (movieID) => {
  mainApi.deleteMovie(movieID)
   .then(() => {
@@ -130,6 +145,7 @@ const onDeleteMovie = (movieID) => {
   .catch(err => console.log(err));
  };
 
+/* Запрос на получение сохраненных фильмов*/
 const getSavedMovies = () => {
  mainApi.getSavedMovies()
   .then((movies) => {
@@ -148,9 +164,11 @@ return (
        <Movies
         isLoading={isLoading}
         movies={allMovies}
+        savedMovies={savedMovies}
         isLoggedIn={loggedIn}
         onFirstSearch={onGetAllMovies}
         onSaveMovie={(data) => onSaveMovie(data)}
+        onDeleteMovie={(id) => onDeleteMovie(id)}
        />}
     />
     <Route

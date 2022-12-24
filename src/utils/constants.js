@@ -38,11 +38,22 @@ function filterShortMovies (arr) {
 function sortedMovies (searchValue, isFilter, arr) {
   let sortedMovies = searchingMovies(searchValue, arr);
 
-  if (isFilter) {
+  if ( isFilter ) {
     sortedMovies = filterShortMovies(sortedMovies);
   }
 
   return sortedMovies;
+}
+
+function checkIsMovieSaved (movies, savedMovies) {
+  return movies.map(movie => {
+    if ( savedMovies.some(savedMovie => savedMovie.movieId === movie.id) ) {
+      movie.isSaved = true;
+      movie.savedMovieId = savedMovies._id;
+    }
+
+    return movie;
+  })
 }
 
 export { 
@@ -56,5 +67,6 @@ export {
   loginFormDefaultValues,
   DEFAULT_MOVIE_DATA,
   getResponseData,
-  sortedMovies
+  sortedMovies,
+  checkIsMovieSaved,
 };
