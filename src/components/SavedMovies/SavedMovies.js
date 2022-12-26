@@ -9,12 +9,17 @@ import { sortedMovies } from '../../utils/constants';
 import './SavedMovies.css';
 
 const SavedMovies = ({ isLoading, movies, isLoggedIn, onMountComponent, onClickMovieBtn }) => {
-
- const [renderedMovies, setRenderedMovies] = useState(movies);
+ const [renderedMovies, setRenderedMovies] = useState([]);
 
   useEffect(() => {
     onMountComponent();
   }, []);
+
+  useEffect(() => {
+   if (movies) {
+    setRenderedMovies(movies);
+   }
+  }, [movies]);
 
   const onClickCardBtn = (movieData) => {
    onClickMovieBtn(movieData._id);

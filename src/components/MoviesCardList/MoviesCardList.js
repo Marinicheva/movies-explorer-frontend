@@ -6,9 +6,11 @@ import './MoviesCardList.css';
 import {MOVIES_URL} from "../../utils/constants";
 
 const MoviesCardList = ({ moviesList, movieBtnClassName, onClickMovieBtn }) => {
+
   const [deviceWidth, setDeviceWidth] = useState(window.screen.width);
   const [addMoviesCount, setAddMovieCount] = useState(0);
-  const [visibleMovies, setVisibleMovies] = useState(null);  
+
+  const [visibleMovies, setVisibleMovies] = useState([]);
 
   useEffect(() => {
     // Функция для слушателя изменения размера окна
@@ -32,7 +34,6 @@ const MoviesCardList = ({ moviesList, movieBtnClassName, onClickMovieBtn }) => {
     if (moviesList) {
       setVisibleMovies(moviesList.slice(0, addMoviesCount));
     }
-    
   }, [addMoviesCount, moviesList]);
 
 
@@ -50,6 +51,8 @@ const MoviesCardList = ({ moviesList, movieBtnClassName, onClickMovieBtn }) => {
     return <h2 className="movies__empty-list">Ничего не найдено</h2>
   }
 
+  console.log(moviesList);
+
   return (
     <>
       <ul className="movies-list">
@@ -64,8 +67,10 @@ const MoviesCardList = ({ moviesList, movieBtnClassName, onClickMovieBtn }) => {
           })
         }
       </ul>
-      { moviesList.length > 15
-       && <button className="movies__more-btn" onClick={onShowMore}>Ещё</button> }
+      { moviesList.length > 15 && visibleMovies.length !== moviesList.length ?
+        <button className="movies__more-btn" onClick={onShowMore}>Ещё</button>
+       : null
+      }
     </>
   )
 }

@@ -147,10 +147,14 @@ const onDeleteMovie = (movieID) => {
 
 /* Запрос на получение сохраненных фильмов*/
 const getSavedMovies = () => {
- mainApi.getSavedMovies()
+ setIsLoading(true);
+
+ return mainApi.getSavedMovies()
   .then((movies) => {
    setSavedMovies(movies);
-  });
+  })
+  .then(() => setIsLoading(false))
+  .catch(err => console.log(err));
 }
 
 return (
