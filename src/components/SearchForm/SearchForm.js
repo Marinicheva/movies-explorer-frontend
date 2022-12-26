@@ -2,18 +2,16 @@ import React, { useEffect, useState } from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import "./SearchForm.css";
 
-const SearchForm = ({ onSearchMovies }) => {
-  const [searchValue, setSearchValue] = useState('');
+const SearchForm = ({ inputValueStorageName, checkboxValueStorageName, onSearchMovies, isInputRequired }) => {
+  const initialInputValue = localStorage.getItem(inputValueStorageName) || '';
+
+  const [searchValue, setSearchValue] = useState(initialInputValue);
   const [isValid, setIsValid] = useState(false);
   const [isShowShortMovies, setIsShowShortMovies] = useState(false);
   const [showError, setShowError] = useState(false);
 
   useEffect(() => {
-    const searchingValue = localStorage.getItem('searchingValue') || '';
-
-    setSearchValue(searchingValue);
-
-    if (searchingValue) {
+    if (searchValue || !isInputRequired) {
       setIsValid(true);
     }
   }, []);
@@ -33,8 +31,6 @@ const SearchForm = ({ onSearchMovies }) => {
 
     if (isValid) {
       onSearchMovies(searchValue, isShowShortMovies);
-      localStorage.setItem('searchingValue', searchValue);
-      localStorage.setItem('checkboxValue', isShowShortMovies);
     }
   }
 
@@ -54,7 +50,7 @@ const SearchForm = ({ onSearchMovies }) => {
             value={searchValue}
             onChange={(evt) => onChangeSearchInput(evt)}
             onBlur={onBlurInput}
-            required
+            required={isInputRequired}
           />
         </label>
         
@@ -63,7 +59,10 @@ const SearchForm = ({ onSearchMovies }) => {
           type="submit"
           disabled={!isValid}
         ></button>
-        <FilterCheckbox onChangeCheckbox={onChangeCheckbox} />
+        <FilterCheckbox
+          checkboxValueStorageName={checkboxValueStorageName}
+          onChangeCheckbox={onChangeCheckbox}
+        />
         {showError && <span className="search__input-error">Нужно ввести ключевое слово</span> }
       </form>
     </div>

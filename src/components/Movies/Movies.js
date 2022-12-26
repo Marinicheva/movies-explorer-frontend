@@ -9,71 +9,99 @@ import { MOVIES_URL, sortedMovies, checkIsMovieSaved} from "../../utils/constant
 
 import './Movies.css';
 
-const Movies = ({ isLoading, movies, savedMovies, isLoggedIn, onFirstSearch, onSaveMovie, onDeleteMovie }) => {
+const Movies = ({
+                 isLoading,
+                 movies,
+                 savedMovies,
+                 isLoggedIn,
+                 onFirstSearch,
+                 onSaveMovie,
+                 onDeleteMovie
+}) => {
 
- //Здесь храняться найденные фильмы
- // Устанавливая сюда стейт проверять есть ли среди них сохраненные фильмы
+ //Здесь храняться найденные, отфильтрованные, отсортированные фильмы
  const [renderedMovies, setRenderedMovies] = useState(null);
 
  // При монтировании компонента проверяем наличие в локалсторэдже найденных фильмов
  useEffect(() => {
-  /*
-  1. Определяем наличие сохраненного результата поиска: есть - ставим его в стейт фильмов
-  2. Определяем наличие сохраненного запроса поиска: есть - фильтруем ставит в рендерируемые и сохраняем в сторэдже
-  3. Ничего вышеперечисленного нет - ничего не делаем
-  */
+
   const savedSearchResult = JSON.parse(localStorage.getItem('searchResult'));
-  const savedSearchingStr = localStorage.getItem('searchingValue');
-  const checkboxValue = JSON.parse(localStorage.getItem('checkboxValue'));
+  const savedSearchingStr = localStorage.getItem('searchStrValue');
+  const checkboxValue = JSON.parse(localStorage.getItem('checkboxMoviesValue'));
 
   if (savedSearchResult) {
+   // Уже есть что отборазить -> сохраненные в сторэдже фильмы
    const checkSavedMovies = checkIsMovieSaved(savedSearchResult, savedMovies);
    setRenderedMovies(checkSavedMovies);
-   return;
+  } else if (savedSearchingStr) {
+   // Поиск был, в сторэдже есть искомая строка -> выполним поиск, сортировку и проверку на сохранение массива от BeatFilms
+   const foundMovies = sortedMovies(savedSearchingStr, checkboxValue, movies);
+   const checkSavedMovies = checkIsMovieSaved(foundMovies, savedMovies);
+
+   setRenderedMovies(checkSavedMovies);
+   saveFoundMovies(foundMovies);
   }
-
-   if (savedSearchingStr) {
-    const foundMovies = sortedMovies(savedSearchingStr, checkboxValue, movies);
-    const checkSavedMovies = checkIsMovieSaved(foundMovies, savedMovies);
-
-    setRenderedMovies(checkSavedMovies);
-    localStorage.setItem('searchResult', JSON.stringify(foundMovies));
-   }
-
  }, [movies, savedMovies]);
- 
+
  const onSubmitSearch = (searchStr, isShortFilms) => {
+  // Сохраним искомую строку и состояние чек-бокса в сторэдж
+  onChangeSearchStrValue(searchStr);
+  onChangeCheckboxValue(isShortFilms);
 
+  // Если длина массива равна 0, этот поиск будет первым -> нужен запрос к API BeatFilms
   if (!movies.length) {
-   console.log(isShortFilms);
    onFirstSearch();
-
-   localStorage.setItem('searchingValue', searchStr);
-   localStorage.setItem('checkboxValue', JSON.stringify(isShortFilms));
   } else {
+   // Если массив от BeatFilms не пустой, найдем и отсортируем его
    const foundMovies = sortedMovies(searchStr, isShortFilms, movies);
    const checkSavedMovies = checkIsMovieSaved(foundMovies, savedMovies);
 
-   localStorage.setItem('searchResult', JSON.stringify(foundMovies));
-
+   // Сохраним найденные фильмы в сторэдж
+   saveFoundMovies(foundMovies);
+   // И в стейт для рендера
    setRenderedMovies(checkSavedMovies);
   }
  }
 
- // Что будем делать при клике на кнопку карточки
+ /* Функции для сохранения данных в сторэдже */
+ const onChangeSearchStrValue = (value) => {
+  localStorage.setItem('searchStrValue', value);
+ }
+
+ const onChangeCheckboxValue = (value) => {
+  localStorage.setItem('checkboxMoviesValue', JSON.stringify(value));
+ }
+
+ const saveFoundMovies = (movies) => {
+  localStorage.setItem('searchResult', JSON.stringify(movies));
+ }
+
+ // При клике по кнопке в карточке фильма
  const onClickCardBtn = (movieData) => {
-  // Вытащить нужные данные и в зависимости от того сохранен фильм или нет запрос к API на добавление или удаление
+
   if(!movieData.isSaved) {
-   console.log('This movie is not saved');
+   // Если фильм еще не сохранен -> соберем необходимые для запроса данные
    const { country, director, duration, year, description, trailerLink, nameRU, nameEN, image, id} = movieData;
    const imageUrl = `${MOVIES_URL}${image.url}`;
    const thumbnail = `${MOVIES_URL}${image.formats.thumbnail.url}`;
 
-   onSaveMovie({country, director, duration, year, description, trailerLink, nameRU, nameEN, thumbnail, image: imageUrl, movieId: id});
+   // Передадим данные в соответвующую функцию
+   onSaveMovie({
+    country,
+    director,
+    duration,
+    year,
+    description,
+    trailerLink,
+    nameRU,
+    nameEN,
+    thumbnail,
+    image: imageUrl,
+    movieId: id});
   } else {
-   console.log('This movie already saved');
+   // Если фильм сохранен -> по id BeatFilm найдем его id в БД
    const deletedMovie = savedMovies.find(item => item.movieId === movieData.id);
-   console.log(deletedMovie);
+   // Передадим этот id в метод, отправляющий запрос на удаление
    onDeleteMovie(deletedMovie._id);
   }
  }
@@ -83,7 +111,12 @@ const Movies = ({ isLoading, movies, savedMovies, isLoggedIn, onFirstSearch, onS
    <Header isLoggedIn={isLoggedIn} />
    <section className="movies"  >
     <SearchForm
+     inputValueStorageName={'searchStrValue'}
+     checkboxValueStorageName={'checkboxMoviesValue'}
      onSearchMovies={(searchStr, isShortFilms) => onSubmitSearch(searchStr, isShortFilms)}
+     onChangeSearchStrValue={(value) => onChangeSearchStrValue(value)}
+     onChangeCheckboxValue={(value) => onChangeCheckboxValue(value)}
+     isInputRequired={true}
     />
     {isLoading
      ? <Preloader />
