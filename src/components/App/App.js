@@ -10,10 +10,11 @@ import PopupInfo from '../PopupInfo/PopupInfo';
 import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
 import SavedMovies from '../SavedMovies/SavedMovies';
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 import MainApi from '../../utils/mainApi';
 
-import { POPUP_TYPES, POPUP_MESSAGES, regFormDefaultValues, loginFormDefaultValues, checkIsMovieSaved } from '../../utils/constants';
+import { POPUP_TYPES, POPUP_MESSAGES, regFormDefaultValues, loginFormDefaultValues } from '../../utils/constants';
 
 import './App.css';
 import mainApi from "../../utils/mainApi";
@@ -49,151 +50,161 @@ function App() {
  }, [setCurrentUserContext]);
 
  /* Открытие попапа*/
-const openPopup = (popupText) => {
- setPopupText(popupText);
- setIsOpenPopup(true);
-}
+ const openPopup = (popupText) => {
+  setPopupText(popupText);
+  setIsOpenPopup(true);
+ }
 
  /* Закрытие попапа*/
-const closePopup = () => {
- setIsOpenPopup(false);
- setPopupText('');
-}
+ const closePopup = () => {
+  setIsOpenPopup(false);
+  setPopupText('');
+ }
 
-/* Запрос по сабмиту кнопки авторизации*/
-const onAuthorizationUser = (userData, resetFormCallback) => {
- MainApi.authorization(userData)
-  .then(() => setCurrentUserContext())
-  .then(() => {
-   setLoggedIn(true);
-   navigate('/movies');
-   resetFormCallback(loginFormDefaultValues);
-  })
-  .catch(err => console.log(err.message));
-}
+ /* Запрос по сабмиту кнопки авторизации*/
+ const onAuthorizationUser = (userData, resetFormCallback) => {
+  MainApi.authorization(userData)
+   .then(() => setCurrentUserContext())
+   .then(() => {
+    setLoggedIn(true);
+    navigate('/movies');
+    resetFormCallback(loginFormDefaultValues);
+   })
+   .catch(err => console.log(err.message));
+ }
 
-/* Запрос по сабмиту регистрации*/
-const onRegistrationUser = (newUserData, resetFormCallback) => {
- return MainApi
-  .registration(newUserData)
-  .then((data) => {
-   onAuthorizationUser({ email: data.email, password: newUserData.password });
-   resetFormCallback(regFormDefaultValues);
-  })
-  .catch(err => openPopup(err.message));
-};
-
-/* Запрос на разлогин*/
-const onSignOut = () => {
- return  MainApi
-  .signout()
-  .then(() => {
-   // TODO: Здесь при успехе: стейт логедИн в фолс и подумать нало ли очистить глобальный стейт
-   console.log('Try to signout');
-   setLoggedIn(false);
-   navigate('/');
-  })
-};
-
-/* Запрос на редактирование данных юзера*/
-const onEditUserData = (changedData) => {
- MainApi.updateUserInfo(changedData)
-  .then((data) => {
-   setCurrentUser({name: data.name, email: data.email});
-  })
-  .then(() => {
-   setPopupType(POPUP_TYPES.info);
-   setPopupText(POPUP_MESSAGES.successEditProfile);
-   setIsOpenPopup(true);
-  })
-  .catch(err => {
-   setPopupType(POPUP_TYPES.error);
-   setPopupText(err.message);
-   setIsOpenPopup(true);
-  });
-}
-
-/* Запрос на получение фильмов с BeatFilms*/
-const onGetAllMovies = () => {
- setIsLoading(true);
- return moviesApi.getMovies()
-  .then((movies) => {
-   setAllMovies(movies);
-   setIsLoading(false);
-  })
-  .catch((err) => {
-   // TODO: Open Popup with error
-   console.log(err);
-  })
-}
-
-/* Запрос на добавление фильма в сохраненные*/
-const onSaveMovie = (movieData) => {
- mainApi.addMovie(movieData)
-  .then(data => {
-   setSavedMovies(state => ([...state, data]));
-  })
-  .catch(err => console.log(err));
-}
-
-/* Запрос на удаление фильма из сохраненных*/
-const onDeleteMovie = (movieID) => {
- mainApi.deleteMovie(movieID)
-  .then(() => {
-   return getSavedMovies();
-  })
-  .catch(err => console.log(err));
+ /* Запрос по сабмиту регистрации*/
+ const onRegistrationUser = (newUserData, resetFormCallback) => {
+  return MainApi
+   .registration(newUserData)
+   .then((data) => {
+    onAuthorizationUser({ email: data.email, password: newUserData.password });
+    resetFormCallback(regFormDefaultValues);
+   })
+   .catch(err => openPopup(err.message));
  };
 
-/* Запрос на получение сохраненных фильмов*/
-const getSavedMovies = () => {
- setIsLoading(true);
+ /* Запрос на разлогин*/
+ const onSignOut = () => {
+  return  MainApi
+   .signout()
+   .then(() => {
+    // TODO: Здесь при успехе: стейт логедИн в фолс и подумать нало ли очистить глобальный стейт
+    console.log('Try to signout');
+    setLoggedIn(false);
+    navigate('/');
+   })
+ };
 
- return mainApi.getSavedMovies()
-  .then((movies) => {
-   setSavedMovies(movies);
-  })
-  .then(() => setIsLoading(false))
-  .catch(err => console.log(err));
-}
+ /* Запрос на редактирование данных юзера*/
+ const onEditUserData = (changedData) => {
+  MainApi.updateUserInfo(changedData)
+   .then((data) => {
+    setCurrentUser({name: data.name, email: data.email});
+   })
+   .then(() => {
+    setPopupType(POPUP_TYPES.info);
+    setPopupText(POPUP_MESSAGES.successEditProfile);
+    setIsOpenPopup(true);
+   })
+   .catch(err => {
+    setPopupType(POPUP_TYPES.error);
+    setPopupText(err.message);
+    setIsOpenPopup(true);
+   });
+ }
 
-return (
- <CurrentUserContext.Provider value={currentUser}>
-  <div className="App">
-   <Routes>
-    <Route exact path="/" element={<Main isLoggedIn={loggedIn} />} />
-    <Route
+ /* Запрос на получение фильмов с BeatFilms*/
+ const onGetAllMovies = () => {
+  setIsLoading(true);
+  return moviesApi.getMovies()
+   .then((movies) => {
+    setAllMovies(movies);
+    setIsLoading(false);
+   })
+   .catch((err) => {
+    // TODO: Open Popup with error
+    console.log(err);
+   })
+ }
+
+ /* Запрос на добавление фильма в сохраненные*/
+ const onSaveMovie = (movieData) => {
+  mainApi.addMovie(movieData)
+   .then(data => {
+    setSavedMovies(state => ([...state, data]));
+   })
+   .catch(err => console.log(err));
+ }
+
+ /* Запрос на удаление фильма из сохраненных*/
+ const onDeleteMovie = (movieID) => {
+  mainApi.deleteMovie(movieID)
+   .then(() => {
+    return getSavedMovies();
+   })
+   .catch(err => console.log(err));
+ };
+
+ /* Запрос на получение сохраненных фильмов*/
+ const getSavedMovies = () => {
+  setIsLoading(true);
+
+  return mainApi.getSavedMovies()
+   .then((movies) => {
+    setSavedMovies(movies);
+   })
+   .then(() => setIsLoading(false))
+   .catch(err => console.log(err));
+ }
+
+ return (
+  <CurrentUserContext.Provider value={currentUser}>
+   <div className="App">
+    <Routes>
+     <Route exact path="/" element={<Main isLoggedIn={loggedIn} />} />
+
+     <Route
       path="/movies"
       element={
-       <Movies
+       <ProtectedRoute
+        loggedIn={loggedIn}
+        element={Movies}
         isLoading={isLoading}
         movies={allMovies}
         savedMovies={savedMovies}
         isLoggedIn={loggedIn}
         onFirstSearch={onGetAllMovies}
         onSaveMovie={(data) => onSaveMovie(data)}
-        onDeleteMovie={(id) => onDeleteMovie(id)}
        />}
-    />
-    <Route
-     path="/saved-movies"
-     element={
-      <SavedMovies
-       isLoading={isLoading}
-       movies={savedMovies}
-       isLoggedIn={loggedIn}
-       onMountComponent={getSavedMovies}
-       onClickMovieBtn={(id) => onDeleteMovie(id)}
-      />}
-    />
-    <Route
-     path="/profile"
-     element={
-      <Profile
-       onEditUserData={(data) => onEditUserData(data)}
-       onSignout={onSignOut}
-      />}
-    />
+     />
+
+
+     <Route
+      path="/saved-movies"
+      element={
+       <ProtectedRoute
+        loggedIn={loggedIn}
+        element={SavedMovies}
+        isLoading={isLoading}
+        movies={savedMovies}
+        isLoggedIn={loggedIn}
+        onMountComponent={getSavedMovies}
+        onClickMovieBtn={(id) => onDeleteMovie(id)}
+       />}
+     />
+
+
+     <Route
+      path="/profile"
+      element={
+       <ProtectedRoute
+        loggedIn={loggedIn}
+        element={Profile}
+        onEditUserData={(data) => onEditUserData(data)}
+        onSignout={onSignOut}
+       />
+      }/>
 
     <Route
      path="/signin"
@@ -221,7 +232,7 @@ return (
     onClose={closePopup}
    />
   </div>
- </CurrentUserContext.Provider>
+</CurrentUserContext.Provider>
 );
 }
 
