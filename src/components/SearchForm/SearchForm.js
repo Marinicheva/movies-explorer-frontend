@@ -14,7 +14,7 @@ const SearchForm = ({ inputValueStorageName, checkboxValueStorageName, onSearchM
     if (searchValue || !isInputRequired) {
       setIsValid(true);
     }
-  }, []);
+  }, [isInputRequired, searchValue]);
 
   const onChangeSearchInput = (evt) => {
     setSearchValue(evt.target.value);
@@ -35,7 +35,9 @@ const SearchForm = ({ inputValueStorageName, checkboxValueStorageName, onSearchM
   }
 
   const onChangeCheckbox = (value) => {
+
     setIsShowShortMovies(value);
+    onSearchMovies(searchValue, value);
   }
 
   return (

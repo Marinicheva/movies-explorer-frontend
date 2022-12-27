@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import './FilterCheckbox.css';
 
 const FilterCheckbox = ({ checkboxValueStorageName, onChangeCheckbox }) => {
- const initialCheckboxValue = JSON.parse(localStorage.getItem(checkboxValueStorageName)) || false;
- const [ isChecked, setIsChecked ] = useState(initialCheckboxValue);
+ const initialCheckboxValue = JSON.parse(localStorage.getItem(checkboxValueStorageName));
+ const [ isChecked, setIsChecked ] = useState(initialCheckboxValue || false);
 
  const checkboxBarClassNames = `checkbox__bar ${isChecked ? "checkbox__bar_on" : ''}`;
  const checkboxToggleClassNames = `checkbox__toggle ${isChecked ? "checkbox__toggle_on" : "checkbox__toggle_off"}`;
