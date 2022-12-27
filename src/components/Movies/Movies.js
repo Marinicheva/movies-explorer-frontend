@@ -81,23 +81,22 @@ const Movies = ({
 
   if(!movieData.isSaved) {
    // Если фильм еще не сохранен -> соберем необходимые для запроса данные
-   const { country, director, duration, year, description, trailerLink, nameRU, nameEN, image, id} = movieData;
-   const imageUrl = `${MOVIES_URL}${image.url}`;
-   const thumbnail = `${MOVIES_URL}${image.formats.thumbnail.url}`;
+   const data = {
+    country: movieData.country,
+    director: movieData.director,
+    duration: movieData.duration,
+    year: movieData.year,
+    description: movieData.description,
+    trailerLink: movieData.trailerLink,
+    nameRU: movieData.nameRU,
+    nameEN: movieData.nameEN,
+   }
+   const {image, id} = movieData;
+   data.image = `${MOVIES_URL}${image.url}`;
+   data.thumbnail = `${MOVIES_URL}${image.formats.thumbnail.url}`;
 
    // Передадим данные в соответвующую функцию
-   onSaveMovie({
-    country,
-    director,
-    duration,
-    year,
-    description,
-    trailerLink,
-    nameRU,
-    nameEN,
-    thumbnail,
-    image: imageUrl,
-    movieId: id});
+   onSaveMovie({...data, movieId: id});
   } else {
    // Если фильм сохранен -> по id BeatFilm найдем его id в БД
    const deletedMovie = savedMovies.find(item => item.movieId === movieData.id);
