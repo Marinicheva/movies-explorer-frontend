@@ -1,5 +1,5 @@
 import {useCallback, useEffect, useState} from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import {Routes, Route, useNavigate, Navigate} from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 import Login from '../Login/Login';
@@ -35,7 +35,6 @@ function App() {
 
  const navigate = useNavigate();
 
- //
  const setCurrentUserContext = useCallback(() => {
   return MainApi.getUserInfo()
    .then((data) => setCurrentUser({name: data.name, email: data.email}));
@@ -46,6 +45,7 @@ function App() {
  useEffect(() => {
   setCurrentUserContext()
    .then(() => setLoggedIn(true))
+   .then(() => navigate(-1))
    .catch((err) => console.log(err));
  }, [setCurrentUserContext]);
 
