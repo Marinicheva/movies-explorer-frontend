@@ -10,24 +10,21 @@
 }
 
 .about-me__name {
-  margin: 0;
-  margin-bottom: 18px;
+  margin: 0 0 18px;
   font-size: 50px;
   line-height: 1.16;
   letter-spacing: -0.04em;
 }
 
 .about-me__summary {
-  margin: 0;
-  margin-bottom: 26px;
+  margin: 0 0 26px;
   font-size: 18px;
   line-height: 1.11;
   font-weight: 500;
 }
 
 .about-me__description {
-  margin: 0;
-  margin-bottom: 100px;
+  margin: 0 0 100px;
   font-size: 14px;
   line-height: 1.57;
 }

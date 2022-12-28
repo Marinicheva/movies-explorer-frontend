@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
 import './MoviesCardList.css';
-import {MOVIES_URL} from "../../utils/constants";
 
 const MoviesCardList = ({ moviesList, movieBtnClassName, onClickMovieBtn }) => {
 

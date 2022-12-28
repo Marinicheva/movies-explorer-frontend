@@ -15,16 +15,14 @@
 }
 
 .promo__title {
-  margin: 0;
-  margin-bottom: 36px;
+  margin: 0 0 36px;
   font-size: 50px;
   line-height: 1.16;
   font-weight: 400;
 }
 
 .promo__subtitle {
-  margin: 0;
-  margin-bottom: 146px;
+  margin: 0 0 146px;
   max-width: 50%;
   font-size: 13px;
   line-height: 1.23;

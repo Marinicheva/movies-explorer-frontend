@@ -14,7 +14,7 @@ const Profile = ({ onEditUserData, onSignout }) => {
     if (currentUser.name && currentUser.email) {
       editUserDataForm.setValues(currentUser);
     }
-  }, [currentUser]);
+  }, [currentUser, editUserDataForm]);
 
   const handleChangeInputs = (evt) => {
     editUserDataForm.handleChange(evt);

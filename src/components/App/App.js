@@ -53,9 +53,10 @@ function App() {
    .then(() => setLoggedIn(true))
    .then(() => navigate(-1))
    .catch((err) => {
-    console.log(err.message)
+    setPopupType(POPUP_TYPES.error);
+    openPopup(err.message);
    });
- }, [setCurrentUserContext]);
+ }, []);
 
 // Открытие попапа
  const openPopup = (text = POPUP_MESSAGES.defaultApi) => {
