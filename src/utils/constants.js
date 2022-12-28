@@ -15,6 +15,7 @@ const NAME_REGEX = /^[a-zа-яё\- ]+$/i;
 
 const regFormDefaultValues = {name: '', email: '', password: ''};
 const loginFormDefaultValues = {email: '', password: ''};
+const defaultCurrentUserData = {name: '', email: ''};
 
 const DEFAULT_MOVIE_DATA = 'Данные отсутствуют';
 
@@ -65,6 +66,7 @@ export {
   NAME_REGEX,
   regFormDefaultValues,
   loginFormDefaultValues,
+  defaultCurrentUserData,
   DEFAULT_MOVIE_DATA,
   getResponseData,
   sortedMovies,

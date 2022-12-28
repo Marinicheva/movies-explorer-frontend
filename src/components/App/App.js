@@ -1,5 +1,5 @@
 import {useCallback, useEffect, useState} from 'react';
-import {Routes, Route, useNavigate, Navigate} from 'react-router-dom';
+import {Routes, Route, useNavigate} from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 import Login from '../Login/Login';
@@ -14,7 +14,13 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 import MainApi from '../../utils/mainApi';
 
-import { POPUP_TYPES, POPUP_MESSAGES, regFormDefaultValues, loginFormDefaultValues } from '../../utils/constants';
+import {
+ POPUP_TYPES,
+ POPUP_MESSAGES,
+ regFormDefaultValues,
+ loginFormDefaultValues,
+ defaultCurrentUserData
+} from '../../utils/constants';
 
 import './App.css';
 import mainApi from "../../utils/mainApi";
@@ -22,7 +28,7 @@ import moviesApi from "../../utils/MoviesApi";
 
 function App() {
  const [loggedIn, setLoggedIn] = useState(false);
- const [currentUser, setCurrentUser] = useState({});
+ const [currentUser, setCurrentUser] = useState(defaultCurrentUserData);
 
  const [isLoading, setIsLoading] = useState(false);
  const [savedMovies, setSavedMovies] = useState([]);
@@ -46,22 +52,24 @@ function App() {
   setCurrentUserContext()
    .then(() => setLoggedIn(true))
    .then(() => navigate(-1))
-   .catch((err) => console.log(err));
+   .catch((err) => {
+    console.log(err.message)
+   });
  }, [setCurrentUserContext]);
 
- /* Открытие попапа*/
- const openPopup = (popupText) => {
-  setPopupText(popupText);
+// Открытие попапа
+ const openPopup = (text = POPUP_MESSAGES.defaultApi) => {
+  setPopupText(text);
   setIsOpenPopup(true);
  }
 
- /* Закрытие попапа*/
+// Закрытие попапа
  const closePopup = () => {
   setIsOpenPopup(false);
   setPopupText('');
  }
 
- /* Запрос по сабмиту кнопки авторизации*/
+// Запрос по сабмиту кнопки авторизации
  const onAuthorizationUser = (userData, resetFormCallback) => {
   MainApi.authorization(userData)
    .then(() => setCurrentUserContext())
@@ -70,10 +78,13 @@ function App() {
     navigate('/movies');
     resetFormCallback(loginFormDefaultValues);
    })
-   .catch(err => console.log(err.message));
+   .catch(err => {
+    setPopupType(POPUP_TYPES.error);
+    openPopup(err.message);
+   });
  }
 
- /* Запрос по сабмиту регистрации*/
+// Запрос по сабмиту регистрации
  const onRegistrationUser = (newUserData, resetFormCallback) => {
   return MainApi
    .registration(newUserData)
@@ -81,22 +92,28 @@ function App() {
     onAuthorizationUser({ email: data.email, password: newUserData.password });
     resetFormCallback(regFormDefaultValues);
    })
-   .catch(err => openPopup(err.message));
+   .catch(err => {
+    setPopupType(POPUP_TYPES.error);
+    openPopup(err.message);
+   });
  };
 
- /* Запрос на разлогин*/
+// Запрос на разлогин
  const onSignOut = () => {
   return  MainApi
    .signout()
    .then(() => {
-    // TODO: Здесь при успехе: стейт логедИн в фолс и подумать нало ли очистить глобальный стейт
-    console.log('Try to signout');
     setLoggedIn(false);
     navigate('/');
+    setCurrentUser(defaultCurrentUserData);
    })
+   .catch(err => {
+    setPopupType(POPUP_TYPES.error);
+    openPopup(err.message);
+   });
  };
 
- /* Запрос на редактирование данных юзера*/
+// Запрос на редактирование данных юзера
  const onEditUserData = (changedData) => {
   MainApi.updateUserInfo(changedData)
    .then((data) => {
@@ -104,17 +121,15 @@ function App() {
    })
    .then(() => {
     setPopupType(POPUP_TYPES.info);
-    setPopupText(POPUP_MESSAGES.successEditProfile);
-    setIsOpenPopup(true);
+    openPopup(POPUP_MESSAGES.successEditProfile)
    })
    .catch(err => {
     setPopupType(POPUP_TYPES.error);
-    setPopupText(err.message);
-    setIsOpenPopup(true);
+    openPopup(err.message);
    });
  }
 
- /* Запрос на получение фильмов с BeatFilms*/
+// Запрос на получение фильмов с BeatFilms
  const onGetAllMovies = () => {
   setIsLoading(true);
   return moviesApi.getMovies()
@@ -123,39 +138,47 @@ function App() {
     setIsLoading(false);
    })
    .catch((err) => {
-    // TODO: Open Popup with error
-    console.log(err);
+    setPopupType(POPUP_TYPES.error);
+    openPopup(err.message);
    })
  }
 
- /* Запрос на добавление фильма в сохраненные*/
+ // Запрос на добавление фильма в сохраненные
  const onSaveMovie = (movieData) => {
   mainApi.addMovie(movieData)
    .then(data => {
     setSavedMovies(state => ([...state, data]));
    })
-   .catch(err => console.log(err));
+   .catch(err => {
+    setPopupType(POPUP_TYPES.error);
+    openPopup(err.message);
+   });
  }
 
- /* Запрос на удаление фильма из сохраненных*/
+// Запрос на удаление фильма из сохраненных
  const onDeleteMovie = (movieID) => {
   mainApi.deleteMovie(movieID)
    .then(() => {
     return getSavedMovies();
    })
-   .catch(err => console.log(err));
+   .catch(err => {
+    setPopupType(POPUP_TYPES.error);
+    openPopup(err.message);
+   });
  };
 
- /* Запрос на получение сохраненных фильмов*/
+// Запрос на получение сохраненных фильмов
  const getSavedMovies = () => {
   setIsLoading(true);
-
   return mainApi.getSavedMovies()
    .then((movies) => {
     setSavedMovies(movies);
    })
    .then(() => setIsLoading(false))
-   .catch(err => console.log(err));
+   .catch(err => {
+    setPopupType(POPUP_TYPES.error);
+    openPopup(err.message);
+   });
  }
 
  return (

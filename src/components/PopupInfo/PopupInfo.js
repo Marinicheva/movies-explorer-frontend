@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useRef} from 'react';
 
 import './PopupInfo.css';
 
 const PopupInfo = ({ popupText ,isOpen, onClose, popupType }) => {
+  const popupLayout = useRef();
 
   const popupClassNames = `popup ${isOpen ? 'popup_opened' : ''}`;
 
@@ -10,9 +11,18 @@ const PopupInfo = ({ popupText ,isOpen, onClose, popupType }) => {
     onClose();
   }
 
-  // TODO: Close by click in overlay
+  const handleClosePopupByOverlay = (evt) => {
+    if (evt.target === popupLayout.current) {
+      onClose();
+    }
+  }
+
   return (
-    <div className={popupClassNames}>
+    <div
+     ref={popupLayout}
+     className={popupClassNames}
+     onClick={(evt) => handleClosePopupByOverlay(evt)}
+    >
       <div className="popup__container">
         {popupType === 'error' && <h2 className="popup__title">Произошла ошибка</h2>}
         <p className="popup__text">{popupText}</p>
