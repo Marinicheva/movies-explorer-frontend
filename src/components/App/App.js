@@ -51,12 +51,10 @@ function App() {
  useEffect(() => {
   setCurrentUserContext()
    .then(() => setLoggedIn(true))
-   .then(() => navigate(-1))
    .catch((err) => {
-    setPopupType(POPUP_TYPES.error);
-    openPopup(err.message);
+    console.log(err.message);
    });
- }, []);
+ }, [setCurrentUserContext]);
 
 // Открытие попапа
  const openPopup = (text = POPUP_MESSAGES.defaultApi) => {
@@ -77,7 +75,10 @@ function App() {
    .then(() => {
     setLoggedIn(true);
     navigate('/movies');
-    resetFormCallback(loginFormDefaultValues);
+
+    if (resetFormCallback) {
+      resetFormCallback(loginFormDefaultValues);
+    }
    })
    .catch(err => {
     setPopupType(POPUP_TYPES.error);
@@ -90,7 +91,7 @@ function App() {
   return MainApi
    .registration(newUserData)
    .then((data) => {
-    onAuthorizationUser({ email: data.email, password: newUserData.password });
+    onAuthorizationUser({ email: data.email, password: newUserData.password }, resetFormCallback);
     resetFormCallback(regFormDefaultValues);
    })
    .catch(err => {
@@ -107,6 +108,7 @@ function App() {
     setLoggedIn(false);
     navigate('/');
     setCurrentUser(defaultCurrentUserData);
+    localStorage.clear();
    })
    .catch(err => {
     setPopupType(POPUP_TYPES.error);
@@ -200,6 +202,7 @@ function App() {
         isLoggedIn={loggedIn}
         onFirstSearch={onGetAllMovies}
         onSaveMovie={(data) => onSaveMovie(data)}
+        onDeleteMovie={(id) => onDeleteMovie(id)}
        />}
      />
 

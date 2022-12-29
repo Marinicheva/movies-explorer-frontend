@@ -1,5 +1,5 @@
 const MOVIES_URL = 'https://api.nomoreparties.co';
-const MAIN_API_URL = 'http://localhost:3000/';
+const MAIN_API_URL = 'https://api.movies.marinich.nomoredomains.club/';
 
 const POPUP_TYPES = {
   error: 'error',
@@ -17,9 +17,7 @@ const regFormDefaultValues = {name: '', email: '', password: ''};
 const loginFormDefaultValues = {email: '', password: ''};
 const defaultCurrentUserData = {name: '', email: ''};
 
-const DEFAULT_MOVIE_DATA = 'Данные отсутствуют';
-
-
+// Функция для обработки ответов в fetch
 function getResponseData (res) {
   if (!res.ok) {
     return res.json().then((data) => { throw new Error (data.message) });
@@ -27,14 +25,17 @@ function getResponseData (res) {
   return res.json();
 }
 
+// Функция поиска фильмов по заданной строке
 function searchingMovies (searchValue, arr) {
   return arr.filter(item => item.nameRU.toLowerCase().includes(searchValue.toLowerCase()));
 }
 
+// Функция фильтрации фильмов по длительности
 function filterShortMovies (arr) {
   return arr.filter(item => item.duration <= 40);
 }
 
+// Функция поиска и фильтрации фильмов
 function sortedMovies (searchValue, isFilter, arr) {
   let sortedMovies = searchingMovies(searchValue, arr);
 
@@ -45,6 +46,8 @@ function sortedMovies (searchValue, isFilter, arr) {
   return sortedMovies;
 }
 
+
+// Функция сравнения двух массивов для определения сохраненных фильмов
 function checkIsMovieSaved (movies, savedMovies) {
   return movies.map(movie => {
     if ( savedMovies.some(savedMovie => savedMovie.movieId === movie.id) ) {
@@ -66,7 +69,6 @@ export {
   regFormDefaultValues,
   loginFormDefaultValues,
   defaultCurrentUserData,
-  DEFAULT_MOVIE_DATA,
   getResponseData,
   sortedMovies,
   checkIsMovieSaved,

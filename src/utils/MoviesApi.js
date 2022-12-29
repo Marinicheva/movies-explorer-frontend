@@ -8,8 +8,7 @@ class MoviesApi {
 
   getMovies() {
     return fetch(`${this._url}/beatfilm-movies`)
-    // TODO: Let's think about error text message 
-      .then(res => this._getData(res, 'Данные с фильмами не получены'))
+      .then(res => this._getData(res, 'Произошла ошибка. Список фильмов не получен'))
   }
 }
 

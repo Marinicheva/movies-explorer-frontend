@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { MOVIES_URL, DEFAULT_MOVIE_DATA } from '../../utils/constants';
+import { MOVIES_URL } from '../../utils/constants';
 import './MoviesCard.css';
 
 const MoviesCard = ({ movie, btnClassName, onClickMovieBtn }) => {
@@ -42,21 +42,5 @@ const MoviesCard = ({ movie, btnClassName, onClickMovieBtn }) => {
   </li>
  );
 }
-
-// Клик по кнопках на разных страницах делает разное, сл-но надо данные карточки поднимать выше
-/* const handleClickSaveBtn = () => {
-
-  const thumbnailUrl = movieData.image.formats.thumbnail.url;
-
-  const imageUrl = movieImage ? `${MOVIES_URL}${movieImage}` : DEFAULT_MOVIE_DATA;
-  const thumbnail =  thumbnailUrl ? `${MOVIES_URL}${thumbnailUrl}` : DEFAULT_MOVIE_DATA;
-  const movieId = movieData.id || DEFAULT_MOVIE_DATA;
-
-  if (!isSaved) {
-   onSaveMovie({movieData.country, movieData.director, year, description, movieId, thumbnail, nameEN, nameRU, duration, trailerLink, image: imageUrl});
-  }
-
-   setIsSaved(state => !state);
- }*/
 
 export default MoviesCard;

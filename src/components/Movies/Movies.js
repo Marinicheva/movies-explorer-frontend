@@ -63,7 +63,7 @@ const Movies = ({
   }
  }
 
- /* Функции для сохранения данных в сторэдже */
+ // Функции для сохранения данных в сторэдже
  const onChangeSearchStrValue = (value) => {
   localStorage.setItem('searchStrValue', value);
  }
