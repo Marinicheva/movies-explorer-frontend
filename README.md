@@ -25,5 +25,12 @@
 - Мгновенная валидация данных вводимых пользователем в формы приложения;
 - Защита части роутов: /movies, /saved-movies и /profile авторизацией с использованием jwt-токена (c сохранением его в cookies);
 
+Проект развернут на облачном сервере посмотреть можно [тут](https://movies.marinich.nomoredomains.club/)
+
+Адреса проекта:
+
+IP 62.84.113.185
+Frontend https://movies.marinich.nomoredomains.club/
+Backend https://api.movies.marinich.nomoredomains.club/
 
 Ссылка на пул-реквест второго этапа фронтенд-части диплома [***тут***](https://github.com/Marinicheva/movies-explorer-frontend/pull/2)
