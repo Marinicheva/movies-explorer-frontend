@@ -20,7 +20,8 @@ const Movies = ({
 }) => {
 
  //Здесь храняться найденные, отфильтрованные, отсортированные фильмы
- const [renderedMovies, setRenderedMovies] = useState(null);
+ const [renderedMovies, setRenderedMovies] = useState([]);
+ const [isMoviesFound, setIsMoviesFound] = useState(true);
 
  // При монтировании компонента проверяем наличие в локалсторэдже найденных фильмов
  useEffect(() => {
@@ -60,6 +61,12 @@ const Movies = ({
    saveFoundMovies(foundMovies);
    // И в стейт для рендера
    setRenderedMovies(checkSavedMovies);
+
+   if (checkSavedMovies.length < 1) {
+    setIsMoviesFound(false);
+   } else {
+    setIsMoviesFound(true);
+   }
   }
  }
 
@@ -121,6 +128,7 @@ const Movies = ({
      ? <Preloader />
      : <MoviesCardList
       moviesList={renderedMovies}
+      isMoviesFound={ isMoviesFound }
       movieBtnClassName="movie__save-btn"
       onClickMovieBtn={(data) => onClickCardBtn(data)}
      />}

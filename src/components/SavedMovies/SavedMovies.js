@@ -10,6 +10,7 @@ import './SavedMovies.css';
 
 const SavedMovies = ({ isLoading, movies, isLoggedIn, onMountComponent, onClickMovieBtn }) => {
  const [renderedMovies, setRenderedMovies] = useState([]);
+ const [isMoviesFound, setIsMoviesFound] = useState(true);
 
   useEffect(() => {
     onMountComponent();
@@ -28,6 +29,12 @@ const SavedMovies = ({ isLoading, movies, isLoggedIn, onMountComponent, onClickM
  const onSearchSubmit = (searchingValue, checkboxValue) => {
    const filteredMovies = sortedMovies(searchingValue, checkboxValue, movies);
    setRenderedMovies(filteredMovies);
+
+   if (filteredMovies.length < 1) {
+    setIsMoviesFound(false);
+   } else {
+    setIsMoviesFound(true);
+   }
  }
 
   return (
@@ -43,6 +50,7 @@ const SavedMovies = ({ isLoading, movies, isLoggedIn, onMountComponent, onClickM
           ? <Preloader />
           : <MoviesCardList
            moviesList={renderedMovies}
+           isMoviesFound={isMoviesFound}
            movieBtnClassName="movie__delete-btn"
            onClickMovieBtn={(data) => onClickCardBtn(data)}
           />

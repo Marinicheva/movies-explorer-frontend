@@ -6,7 +6,7 @@ import {screenSizes, visibleMoviesCount} from '../../utils/constants';
 
 import './MoviesCardList.css';
 
-const MoviesCardList = ({ moviesList, movieBtnClassName, onClickMovieBtn }) => {
+const MoviesCardList = ({ moviesList, isMoviesFound, movieBtnClassName, onClickMovieBtn }) => {
 
   const [deviceWidth, setDeviceWidth] = useState(window.screen.width);
   const [addMoviesCount, setAddMovieCount] = useState(0);
@@ -48,7 +48,7 @@ const MoviesCardList = ({ moviesList, movieBtnClassName, onClickMovieBtn }) => {
   }
 
   // Если нет сохраненных или ничего не найдено
-  if (!moviesList || moviesList.length < 1) {
+  if ( !isMoviesFound ) {
     return <h2 className="movies__empty-list">Ничего не найдено</h2>
   }
 
