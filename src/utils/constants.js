@@ -17,6 +17,19 @@ const regFormDefaultValues = {name: '', email: '', password: ''};
 const loginFormDefaultValues = {email: '', password: ''};
 const defaultCurrentUserData = {name: '', email: ''};
 
+const shortMovieDuration = 40;
+
+const screenSizes = {
+  small: 451,
+  medium: 851,
+}
+
+const visibleMoviesCount = {
+  smallScreen: 5,
+  mediumScreen: 8,
+  defaultCount: 16,
+}
+
 // Функция для обработки ответов в fetch
 function getResponseData (res) {
   if (!res.ok) {
@@ -32,7 +45,7 @@ function searchingMovies (searchValue, arr) {
 
 // Функция фильтрации фильмов по длительности
 function filterShortMovies (arr) {
-  return arr.filter(item => item.duration <= 40);
+  return arr.filter(item => item.duration <= shortMovieDuration);
 }
 
 // Функция поиска и фильтрации фильмов
@@ -69,6 +82,8 @@ export {
   regFormDefaultValues,
   loginFormDefaultValues,
   defaultCurrentUserData,
+  screenSizes,
+  visibleMoviesCount,
   getResponseData,
   sortedMovies,
   checkIsMovieSaved,

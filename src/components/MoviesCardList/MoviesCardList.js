@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 import MoviesCard from '../MoviesCard/MoviesCard';
 
+import {screenSizes, visibleMoviesCount} from '../../utils/constants';
+
 import './MoviesCardList.css';
 
 const MoviesCardList = ({ moviesList, movieBtnClassName, onClickMovieBtn }) => {
@@ -18,7 +20,7 @@ const MoviesCardList = ({ moviesList, movieBtnClassName, onClickMovieBtn }) => {
     }
 
     // Определяем количество карточек к отображению
-    const count = deviceWidth < 451 ? 5 : deviceWidth < 851 ? 8 : 16;
+    const count = deviceWidth < screenSizes.small ? visibleMoviesCount.smallScreen : deviceWidth < screenSizes.medium ? visibleMoviesCount.mediumScreen : visibleMoviesCount.defaultCount;
     setAddMovieCount(count);
 
     window.addEventListener('resize', handleChangeScreenSize);
@@ -38,7 +40,7 @@ const MoviesCardList = ({ moviesList, movieBtnClassName, onClickMovieBtn }) => {
 
   // Добавляем нужное кол-во карточек в зависимости от размера экрана
   const onShowMore = () => {
-    if (deviceWidth < 851) {
+    if (deviceWidth < screenSizes.medium) {
       setAddMovieCount(state => state + 2);
     } else {
       setAddMovieCount(state => state + 4);
