@@ -49,7 +49,12 @@ function App() {
  // т.о. проверяем хранят ли куки токен
  useEffect(() => {
   setCurrentUserContext()
-   .then(() => setLoggedIn(true))
+   .then(() => {
+    setLoggedIn(true);
+   })
+   .then(() => {
+    if (window.history.length > 2) navigate(-1);
+   })
    .catch((err) => {
     console.log(err.message);
    });
@@ -60,6 +65,7 @@ useEffect(() => {
    getSavedMovies();
   }
  }, [loggedIn]);
+
 
 // Открытие попапа
  const openPopup = (text = POPUP_MESSAGES.defaultApi) => {
