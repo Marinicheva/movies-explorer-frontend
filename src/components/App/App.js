@@ -34,7 +34,6 @@ function App() {
  const [savedMovies, setSavedMovies] = useState([]);
  const [allMovies, setAllMovies] = useState([]);
 
-
  const [isOpenPopup, setIsOpenPopup] = useState(false);
  const [popupText, setPopupText] = useState('');
  const [popupType, setPopupType] = useState('');
@@ -55,6 +54,12 @@ function App() {
     console.log(err.message);
    });
  }, [setCurrentUserContext]);
+
+useEffect(() => {
+  if (loggedIn) {
+   getSavedMovies();
+  }
+ }, [loggedIn]);
 
 // Открытие попапа
  const openPopup = (text = POPUP_MESSAGES.defaultApi) => {
@@ -105,6 +110,8 @@ function App() {
   return  MainApi
    .signout()
    .then(() => {
+    setSavedMovies([]);
+    setAllMovies([]);
     setLoggedIn(false);
     navigate('/');
     setCurrentUser(defaultCurrentUserData);
@@ -216,7 +223,6 @@ function App() {
         isLoading={isLoading}
         movies={savedMovies}
         isLoggedIn={loggedIn}
-        onMountComponent={getSavedMovies}
         onClickMovieBtn={(id) => onDeleteMovie(id)}
        />}
      />

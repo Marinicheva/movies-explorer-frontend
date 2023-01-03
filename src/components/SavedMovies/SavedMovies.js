@@ -8,13 +8,9 @@ import { sortedMovies } from '../../utils/constants';
 
 import './SavedMovies.css';
 
-const SavedMovies = ({ isLoading, movies, isLoggedIn, onMountComponent, onClickMovieBtn }) => {
+const SavedMovies = ({ isLoading, movies, isLoggedIn, onClickMovieBtn }) => {
  const [renderedMovies, setRenderedMovies] = useState([]);
  const [isMoviesFound, setIsMoviesFound] = useState(true);
-
-  useEffect(() => {
-    onMountComponent();
-  }, []);
 
   useEffect(() => {
    if (movies) {

@@ -63,9 +63,12 @@ function sortedMovies (searchValue, isFilter, arr) {
 // Функция сравнения двух массивов для определения сохраненных фильмов
 function checkIsMovieSaved (movies, savedMovies) {
   return movies.map(movie => {
+
     if ( savedMovies.some(savedMovie => savedMovie.movieId === movie.id) ) {
       movie.isSaved = true;
       movie.savedMovieId = savedMovies._id;
+    } else {
+      movie.isSaved = false;
     }
 
     return movie;

@@ -128,7 +128,7 @@ const Movies = ({
      ? <Preloader />
      : <MoviesCardList
       moviesList={renderedMovies}
-      isMoviesFound={ isMoviesFound }
+      isMoviesFound={isMoviesFound}
       movieBtnClassName="movie__save-btn"
       onClickMovieBtn={(data) => onClickCardBtn(data)}
      />}
