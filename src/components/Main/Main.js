@@ -6,10 +6,10 @@ import AboutMe from '../AboutMe/AboutMe';
 import Portfolio from '../Portfolio/Portfolio';
 import Footer from '../Footer/Footer';
 
-const Main = () => {
+const Main = ({isLoggedIn}) => {
   return (
     <div className="content">
-      <Header isLoggedIn={false} withBg={true} />
+      <Header isLoggedIn={isLoggedIn} withBg={true} />
       <Promo />
       <AboutProject />
       <Techs />

@@ -1,23 +1,46 @@
 import React from 'react';
 
+import { MOVIES_URL } from '../../utils/constants';
 import './MoviesCard.css';
 
-const MoviesCard = ({ movieData, btnClassName }) => {
-  const { name, duration, isSaved, image } = movieData;
-  const durationStr = `${Math.floor(duration / 60)}ч ${duration % 60 > 9 ? duration % 60 : '0' + duration % 60}м`;
+const MoviesCard = ({ movie, btnClassName, onClickMovieBtn }) => {
+ const durationHours = Math.floor(movie.duration / 60);
+ const durationMinutes = movie.duration % 60;
+ const image = typeof movie.image === 'string' ? movie.image : `${MOVIES_URL}${movie.image.url}`;
 
-  const movieBtnClassNames = btnClassName !== 'movie__save-btn' ? btnClassName : (btnClassName + (isSaved ? ' movie__save-btn_active' : ''));
+ const savedClassName = movie.isSaved ? ' movie__save-btn_active' : '';
+ const movieBtnClassNames = btnClassName !== 'movie__save-btn' ? btnClassName : (btnClassName + savedClassName);
 
-  return (
-    <li className="movie">
-      <img src={image.url} alt="Постер фильма" className="movie__img" />
-      <h3 className="movie__title">{name}</h3>
-      <button className={movieBtnClassNames}></button>
-      <div className="movie__bottom">
-        <p className="movie__duration">{durationStr}</p>
-      </div>
-    </li>
-  )
+ const handleClick = () => {
+  onClickMovieBtn(movie);
+ }
+
+ return (
+  <li className="movies__item movie">
+   <a
+    href={movie.trailerLink}
+    className="movie__link"
+    target="blank"
+    rel="noopener noreferrer"
+   >
+    {`Ссылка на трейлер фильма ${movie.nameRU} на видеохостинге Youtube`}
+   </a>
+   <img
+    src={image}
+    alt={`Постер фильма "${movie.nameRU}"`}
+    className="movie__img"
+   />
+   <h3 className="movie__title">{movie.nameRU}</h3>
+   <button
+     className={movieBtnClassNames}
+     onClick={() => handleClick()}></button>
+   <div className="movie__bottom">
+    <p className="movie__duration">
+     {`${durationHours}ч ${durationMinutes > 9 ? durationMinutes : '0' + durationMinutes}`}
+    </p>
+   </div>
+  </li>
+ );
 }
 
 export default MoviesCard;

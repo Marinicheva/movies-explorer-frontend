@@ -27,15 +27,13 @@
 }
 
 .footer__year {
-  margin: 0;
-  margin-right: auto;
+  margin: 0 auto 0 0;
   font-size: 13px;
   line-height: 1.23;
 }
 
 .footer__author {
-  margin: 0;
-  margin-right: 20px;
+  margin: 0 20px 0 0;
   font-size: 13px;
   line-height: 1.23;
 }
