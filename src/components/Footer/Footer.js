@@ -10,7 +10,14 @@ const Footer = () => {
       <div className="footer__bottom">
         <p className="footer__year">&#169; {year}</p>
           <p className="footer__author">Мариничева Екатерина</p>
-          <a href="https://github.com/Marinicheva" className="footer__link" target="blank">Github</a>
+          <a
+           href="https://github.com/Marinicheva"
+           className="footer__link"
+           target="blank"
+           rel="noopener noreferrer"
+          >
+           Github
+          </a>
       </div>
     </footer>
   )
